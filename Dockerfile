@@ -19,11 +19,11 @@ COPY . ./
 RUN npm run build
 
 # Stage 2: Serve the app
-FROM quay.io/cloudservices/caddy-ubi:ec1577c
+FROM quay.io/redhat-services-prod/hcm-eng-prod-tenant/caddy-ubi:0d6954b
 
 ENV CADDY_TLS_MODE http_port 8000
 
-COPY ./config/Caddyfile /opt/app-root/src/Caddyfile
+COPY ./config/Caddyfile /etc/caddy/Caddyfile
 
 COPY --from=react-build /app/build /opt/app-root/src/build
 
@@ -33,4 +33,3 @@ WORKDIR /opt/app-root/src
 
 EXPOSE 8000
 
-CMD ["caddy", "run", "--config", "/opt/app-root/src/Caddyfile"]
