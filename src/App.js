@@ -135,7 +135,7 @@ function App() {
         </DropdownItem>
         <Divider component="li" key="separator-b" />
         <DropdownItem value={5} key="separated action b" onClick={goToRecipes}>
-          Recipies
+          Recipes
         </DropdownItem>
         <Divider component="li" key="separator-b" />
         <DropdownItem value={5} key="separated action b" onClick={deleteCookie}>
