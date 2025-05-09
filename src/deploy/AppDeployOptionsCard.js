@@ -89,17 +89,10 @@ export default function AppDeployoptionsCard() {
         </TextContent>
       </StackItem>
       <StackItem>
-        <Tooltip
-          content={
-            <div>
-              Frontend deploys are currently disabled due to a cluster networking issue. We are working with IT on a solution and will enable the feature as soon as possible.
-            </div>
-          }
-        >
+        <Tooltip>
           <span>
             <Switch
               label="Deploy Frontends"
-              isDisabled
               isChecked={frontends}
               onChange={() => {
                 setStoreFrontends(!frontends);
