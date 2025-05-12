@@ -89,7 +89,6 @@ export default function AppDeployoptionsCard() {
         </TextContent>
       </StackItem>
       <StackItem>
-        <Tooltip>
           <span>
             <Switch
               label="Deploy Frontends"
@@ -103,7 +102,6 @@ export default function AppDeployoptionsCard() {
             &nbsp;{" "}
             <HelpTip content="By default, frontends are not deployed. Check to deploy frontends." />
           </span>
-        </Tooltip>
       </StackItem>
       <StackItem>
         <Switch
