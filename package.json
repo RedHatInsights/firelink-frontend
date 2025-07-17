@@ -45,6 +45,9 @@
       "last 1 safari version"
     ]
   },
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "devDependencies": {
     "@testing-library/react": "^14.2.1",
     "http-proxy-middleware": "^2.0.6"
