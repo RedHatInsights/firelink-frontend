@@ -235,7 +235,7 @@ spec:
         - name: name
           value: buildah
         - name: bundle
-          value: quay.io/konflux-ci/tekton-catalog/task-buildah:0.4@sha256:42ff0cf826a30eae8676f9ff841b69a8efd587fc5ba0277da0d2c23b891e6b3d
+          value: quay.io/konflux-ci/tekton-catalog/task-buildah:0.4@sha256:d23861d5d19f45355592420a467f8f7a91f23b26722fd7fd576cdbbc4d66deed
         - name: kind
           value: task
         resolver: bundles
