@@ -4,7 +4,7 @@ import {
   Bullseye,
   Card,
   CardBody,
-  TextContent,
+  Content,
   CardTitle,
   CardFooter,
 } from "@patternfly/react-core";
@@ -18,7 +18,7 @@ function Loading(message = "") {
           <CardBody>
             <Bullseye>
               <Spinner aria-label="Loading" />
-              <TextContent></TextContent>
+              <Content></Content>
             </Bullseye>
           </CardBody>
           <CardFooter>{message.message}</CardFooter>

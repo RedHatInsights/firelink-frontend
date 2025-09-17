@@ -1,12 +1,11 @@
 import React from 'react';
 import {
-	Checkbox
-} from '@patternfly/react-core';
-import {
-	DropdownToggle,
+	Checkbox,
+	Dropdown,
 	DropdownItem,
-	Dropdown
-} from '@patternfly/react-core/deprecated';
+	DropdownList,
+	MenuToggle
+} from '@patternfly/react-core';
 import {useState} from 'react';
 
 function getUniqueValuesForPropertyInArrayOfObjects(sourceArray, sourceColumn) {
@@ -33,9 +32,11 @@ export default function FilterDropdown({sourceArray, sourceColumn, filter, setFi
  
     const values = getUniqueValuesForPropertyInArrayOfObjects(sourceArray, sourceColumn);
 
-    const toggle = <DropdownToggle id="toggle-basic" onToggle={()=>{setOpen(!open)}}>
-      Filter: {selectedValue}
-    </DropdownToggle>
+    const toggle = (toggleRef) => (
+        <MenuToggle ref={toggleRef} onClick={() => setOpen(!open)} isExpanded={open}>
+            Filter: {selectedValue}
+        </MenuToggle>
+    );
   
     const items = values.map((value, i) => {
       return <DropdownItem key={value+i+"DropdownItem"}>
@@ -45,7 +46,18 @@ export default function FilterDropdown({sourceArray, sourceColumn, filter, setFi
             setOpen(!open)}
         } id={value+i+"Checkbox"}/>
       </DropdownItem>
-    })
+    });
     
-    return <Dropdown toggle={toggle} dropdownItems={items} isOpen={open}/>
-  }
+    return (
+        <Dropdown
+            isOpen={open}
+            onSelect={() => setOpen(false)}
+            onOpenChange={(isOpen) => setOpen(isOpen)}
+            toggle={toggle}
+        >
+            <DropdownList>
+                {items}
+            </DropdownList>
+        </Dropdown>
+    );
+}

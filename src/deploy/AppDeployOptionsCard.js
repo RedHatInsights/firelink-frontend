@@ -4,11 +4,9 @@ import {
   Stack,
   StackItem,
   Switch,
-  Text,
-  TextContent,
-  TextVariants,
-  Tooltip,
-} from "@patternfly/react-core";
+  Content,
+  ContentVariants,
+  } from "@patternfly/react-core";
 import {
   getAppDeployFrontends,
   getAppDeployNoReleaseOnFail,
@@ -84,9 +82,9 @@ export default function AppDeployoptionsCard() {
   return (
     <Stack hasGutter>
       <StackItem>
-        <TextContent>
-          <Text component={TextVariants.h1}>Set Deployment Options</Text>
-        </TextContent>
+        <Content>
+          <Content component={ContentVariants.h1}>Set Deployment Options</Content>
+        </Content>
       </StackItem>
       <StackItem>
           <span>

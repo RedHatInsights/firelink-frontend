@@ -9,9 +9,8 @@ import {
     CardBody,
     Stack,
     StackItem,
-    Text,
-    TextContent,
-    TextVariants,
+    Content,
+    ContentVariants,
 } from '@patternfly/react-core';
 import {
     getAppDeployApps,
@@ -95,11 +94,11 @@ export default function SetParameters() {
 
     return <Stack>
         <StackItem>
-            <TextContent>
-                <Text component={TextVariants.h1}>
+            <Content>
+                <Content component={ContentVariants.h1}>
                     Override Deploy Template Parameters
-                </Text>
-            </TextContent>
+                </Content>
+            </Content>
         </StackItem>
         <StackItem>
             <Grid hasGutter isFullHeight>

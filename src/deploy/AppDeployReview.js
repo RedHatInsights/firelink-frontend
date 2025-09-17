@@ -4,9 +4,8 @@ import { getAppDeploySlice} from "../store/AppDeploySlice";
 import {
     Stack,
     StackItem,
-    Text,
-    TextContent,
-    TextVariants,
+    Content,
+    ContentVariants,
     Split,
     SplitItem,
 } from '@patternfly/react-core';
@@ -23,11 +22,11 @@ export default function AppDeployReview()  {
             <StackItem>
                 <Split>
                     <SplitItem>
-                        <TextContent>
-                            <Text component={TextVariants.h1}>
+                        <Content>
+                            <Content component={ContentVariants.h1}>
                                 Review & Deploy
-                            </Text>
-                        </TextContent>
+                            </Content>
+                        </Content>
                     </SplitItem>
                     <SplitItem isFilled/>
                     <SplitItem>

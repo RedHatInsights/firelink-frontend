@@ -3,10 +3,8 @@ import {
   SplitItem,
   Title,
   TitleSizes,
-  Button,
   Page,
   PageSection,
-  PageSectionVariants,
   Split,
   Switch,
 } from "@patternfly/react-core";
@@ -109,7 +107,7 @@ function NamespaceList() {
   if (loading && !autoRefresh) {
     return (
       <Page>
-        <PageSection>
+        <PageSection hasBodyWrapper={false}>
           <Loading message="Fetching namespaces and reservations..." />
         </PageSection>
       </Page>
@@ -119,7 +117,7 @@ function NamespaceList() {
   if (showReleaseModal) {
     return (
       <Page>
-        <PageSection>
+        <PageSection hasBodyWrapper={false}>
           <Loading message="Releasing namespace..." />
         </PageSection>
       </Page>
@@ -129,7 +127,7 @@ function NamespaceList() {
   if (error) {
     return (
       <Page>
-        <PageSection>
+        <PageSection hasBodyWrapper={false}>
           <ErrorCard error={error} onRetry={() => refreshData()} />
         </PageSection>
       </Page>
@@ -141,7 +139,7 @@ function NamespaceList() {
   return (
     <React.Fragment>
       <Page>
-        <PageSection variant={PageSectionVariants.light}>
+        <PageSection hasBodyWrapper={false} >
           <Split hasGutter>
             <SplitItem>
               <Title headingLevel="h1" size={TitleSizes["3xl"]}>
@@ -154,7 +152,7 @@ function NamespaceList() {
               <Switch
                 id="namespace-list-my-reservations"
                 label="My Reservations"
-                labelOff="My Reservations"
+                
                 isChecked={showJustMyReservations}
                 isReversed
                 onChange={() => {
@@ -165,7 +163,7 @@ function NamespaceList() {
 
           </Split>
         </PageSection>
-        <PageSection hasOverflowScroll={true}>
+        <PageSection hasBodyWrapper={false} hasOverflowScroll={true}>
           {isNamespacesEmpty ? (
             <FadeInFadeOut>
               <Loading message="Fetching namespaces and reservations..." />

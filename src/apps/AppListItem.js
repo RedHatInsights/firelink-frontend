@@ -106,7 +106,7 @@ export default function AppListItem({ app, showFavorites }) {
       }}
       key={key}
     >
-      <Card isLarge={true} isRounded={true} className="pf-u-box-shadow-lg" >
+      <Card isLarge={true}  className="pf-u-box-shadow-lg" >
         <CardTitle>
           <Split>
               <SplitItem isFilled></SplitItem>
@@ -142,8 +142,8 @@ export default function AppListItem({ app, showFavorites }) {
         <CardBody>
           <Stack>
             <StackItem>
-              <Button variant="link" onClick={developerPortalLink}>
-                <ExternalLinkAltIcon /> Developer Portal
+              <Button icon={<ExternalLinkAltIcon />} variant="link" onClick={developerPortalLink}>
+                 Developer Portal
               </Button>
             </StackItem>
             <StackItem>

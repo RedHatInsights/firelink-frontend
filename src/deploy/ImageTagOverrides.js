@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ImageTagInput from './ImageTagInput';
-import { Stack, StackItem, Title, Text, TextContent, Split, SplitItem, Button } from '@patternfly/react-core';
+import { Stack, StackItem, Title, Content, Split, SplitItem, Button } from '@patternfly/react-core';
 import {
     setSetImageTag,
     getAppDeploySetImageTag
@@ -49,11 +49,11 @@ export default function ParentComponent() {
             </Split>
         </StackItem>
         <StackItem>
-            <TextContent>
-            <Text>
+            <Content>
+            <Content component="p">
             Update container image tags in your templates by specifying the image URI and the new tag. The system will automatically replace all occurrences of the image URI with the new tag. This optional feature is particularly beneficial for templates that do not parameterize their image tag. Utilize this functionality only if it is necessary for your use case.
-            </Text>
-            </TextContent>
+            </Content>
+            </Content>
         </StackItem>
         {Object.entries(imageTagOverrides).map(([key, value], index) => (
             <StackItem key={index}>

@@ -5,7 +5,6 @@ import {
   CardTitle,
   CardBody,
   EmptyState,
-  EmptyStateIcon,
   EmptyStateBody,
   Title,
   Skeleton,
@@ -151,11 +150,9 @@ const PodsTableCard = ({ namespace, onError = (_error) => {} }) => {
       <Card>
         <CardTitle>Pods Resource Usage</CardTitle>
         <CardBody>
-          <EmptyState variant={EmptyStateVariant.full}>
-            <EmptyStateIcon icon={CubesIcon} />
-            <Title headingLevel="h2" size="lg">
+          <EmptyState titleText={<Title headingLevel="h2" size="lg">
               Error loading pods resource usage
-            </Title>
+            </Title>} icon={CubesIcon} variant={EmptyStateVariant.full}>
             <EmptyStateBody>
               An error occurred while loading pods resource usage.
             </EmptyStateBody>

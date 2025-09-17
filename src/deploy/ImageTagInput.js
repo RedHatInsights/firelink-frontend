@@ -34,8 +34,8 @@ export default function ImageTagInput({ imageTag, onImageTagChange, onDelete }) 
           validated={isValid ? 'default' : 'error'}
           style={{ flex: 1 }}
         />
-        <Button variant="danger" onClick={onDelete} style={{ marginLeft: '8px' }}>
-          <TimesCircleIcon />
+        <Button icon={<TimesCircleIcon />} variant="danger" onClick={onDelete} style={{ marginLeft: '8px' }}>
+          
         </Button>
       </div>
       {!isValid && <FormHelperText isError>Image tag override is malformed.</FormHelperText>}

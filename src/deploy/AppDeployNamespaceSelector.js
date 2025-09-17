@@ -6,9 +6,8 @@ import {
 	StackItem,
     FormSelect,
     FormSelectOption,
-    Text,
-    TextContent,
-    TextVariants,
+    Content,
+    ContentVariants,
 } from '@patternfly/react-core';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -72,19 +71,19 @@ export default function AppDeployNamespaceSelector() {
 
     return <Stack hasGutter>
         <StackItem>
-            <TextContent>
-                <Text component={TextVariants.h1}>
+            <Content>
+                <Content component={ContentVariants.h1}>
                     Namespace Selection
-                </Text>
-            </TextContent>
+                </Content>
+            </Content>
         </StackItem>
         { myReservations.length === 0 ? (
                 <StackItem>
-                    <TextContent>
-                        <Text>
+                    <Content>
+                        <Content component="p">
                             You have no namespaces reserved. A new namespace will be reserved for you.
-                        </Text>
-                    </TextContent>
+                        </Content>
+                    </Content>
                 </StackItem>
             ) : ( <React.Fragment>
                 <StackItem>

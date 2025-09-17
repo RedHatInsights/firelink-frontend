@@ -1,9 +1,6 @@
 import React from 'react';
 
-import {
-    Chip,
-    ChipGroup,
-} from '@patternfly/react-core';
+import { Label, LabelGroup } from '@patternfly/react-core';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -17,24 +14,24 @@ export default function SelectedAppsChips({appList}) {
 
     const Chips = () => {
         if (apps.length === 0) {
-            return <ChipGroup categoryName='Selected Apps'>
-                <Chip key='empty' isReadOnly>
+            return <LabelGroup categoryName='Selected Apps'>
+                <Label variant="outline" key='empty' >
                     None
-                </Chip>
-            </ChipGroup>;
+                </Label>
+            </LabelGroup>;
         }
         if (appList) {
-            return <ChipGroup categoryName='Selected Apps'>
-                {appList.map(currentChip => <Chip key={currentChip} isReadOnly>
+            return <LabelGroup categoryName='Selected Apps'>
+                {appList.map(currentChip => <Label variant="outline" key={currentChip} >
                     {currentChip}
-                </Chip>)}
-            </ChipGroup>;
+                </Label>)}
+            </LabelGroup>;
         }
-        return <ChipGroup categoryName='Selected Apps'>
-            {apps.map(currentChip => <Chip key={currentChip} isReadOnly>
+        return <LabelGroup categoryName='Selected Apps'>
+            {apps.map(currentChip => <Label variant="outline" key={currentChip} >
                 {currentChip}
-            </Chip>)}
-        </ChipGroup>;
+            </Label>)}
+        </LabelGroup>;
     }
 
     return < Chips />;

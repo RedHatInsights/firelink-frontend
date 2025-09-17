@@ -16,7 +16,6 @@ import {
   TextInput,
   Page,
   PageSection,
-  PageSectionVariants,
   SplitItem,
   CardTitle,
 } from "@patternfly/react-core";
@@ -108,7 +107,7 @@ export default function NamespaceReserve() {
       >
         <Switch
           label="Yes"
-          labelOff="No"
+          
           isChecked={force}
           onChange={handleForce}
         />
@@ -174,7 +173,7 @@ export default function NamespaceReserve() {
   return (
     <React.Fragment>
       <Page>
-        <PageSection variant={PageSectionVariants.light}>
+        <PageSection hasBodyWrapper={false} >
           <Split>
             <SplitItem>
               <Title headingLevel="h1" size={TitleSizes["3xl"]}>
@@ -194,7 +193,7 @@ export default function NamespaceReserve() {
             </SplitItem>
           </Split>
         </PageSection>
-        <PageSection isCenterAligned={true}>
+        <PageSection hasBodyWrapper={false} isCenterAligned={true}>
           <FadeInFadeOut>{renderUI()}</FadeInFadeOut>
         </PageSection>
       </Page>

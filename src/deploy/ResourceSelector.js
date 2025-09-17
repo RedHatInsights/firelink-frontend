@@ -4,9 +4,9 @@ import {
     getAppNames,
     getAppDeployComponents,
 } from "../store/AppDeploySlice";
-import { 
-    DualListSelector
-} from "@patternfly/react-core";
+import {
+	DualListSelector
+} from '@patternfly/react-core/deprecated';
 
 export default function ResourceSelector({setSelection, getSelection}) {
 

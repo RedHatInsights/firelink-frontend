@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
-    Grid,
-    GridItem,
-    Stack,
-    StackItem,
-    Text,
-    TextContent,
-    TextList,
-    TextListItem,
-    TextVariants,
-    Chip
+	Label, Grid,
+	GridItem,
+	Stack,
+	StackItem,
+	Content,
+	ContentVariants
 } from '@patternfly/react-core';
+
 import {
     CheckCircleIcon,
     TimesCircleIcon,
@@ -32,11 +29,11 @@ const PreserveResources = ({ resources }) => {
         return "No apps or components selected for resource preservation.";
     }
     return resources.map((resource) => (
-        <TextListItem key={resource}>
-            <Text style={{ fontFamily: "monospace" }}>
+        <li key={resource}>
+            <Content style={{ fontFamily: "monospace" }}>
                 {resource}
-            </Text>
-        </TextListItem>
+            </Content>
+        </li>
     ));
 };
 
@@ -45,11 +42,11 @@ const OmitDependencies = ({ dependencies }) => {
         return "No apps or components selected to omit dependencies.";
     }
     return dependencies.map((resource) => (
-        <TextListItem key={resource}>
-            <Text style={{ fontFamily: "monospace" }}>
+        <li key={resource}>
+            <Content style={{ fontFamily: "monospace" }}>
                 {resource}
-            </Text>
-        </TextListItem>
+            </Content>
+        </li>
     ));
 };
 
@@ -58,11 +55,11 @@ const SetParameters = ({ parameters }) => {
         return "No template parameters overridden.";
     }
     return Object.entries(parameters).map(([key, value]) => (
-        <TextListItem key={key}>
-            <Text style={{ fontFamily: "monospace" }}>
+        <li key={key}>
+            <Content style={{ fontFamily: "monospace" }}>
                 {key}={value}
-            </Text>
-        </TextListItem>
+            </Content>
+        </li>
     ));
 };
 
@@ -71,26 +68,26 @@ const ImageTagOverrides = ({ overrides }) => {
         return "No image tags overridden.";
     }
     return Object.entries(overrides).map(([key, value]) => (
-        <TextListItem key={key}>
-            <Text style={{ fontFamily: "monospace" }}>
+        <li key={key}>
+            <Content style={{ fontFamily: "monospace" }}>
                 {key}={value}
-            </Text>
-        </TextListItem>
+            </Content>
+        </li>
     ));
 };
 
 const AppDeployOptions = ({ recipe }) => (
-    <TextList>
-        <TextListItem>Deploy Frontends: {recipe.frontends ? <GreenCheck /> : <RedX />}</TextListItem>
-        <TextListItem>Release on fail: {recipe.no_release_on_fail ? <RedX /> : <GreenCheck />}</TextListItem>
-        <TextListItem>Get dependencies: {recipe.get_dependencies ? <GreenCheck /> : <RedX/>}</TextListItem>
-        <TextListItem>Single replicas: {recipe.single_replicas ? <GreenCheck /> : <RedX />}</TextListItem>
-        <TextListItem>Pool: <Chip isReadOnly>{recipe.pool}</Chip></TextListItem>
-        <TextListItem>Duration: <Chip isReadOnly>{recipe.duration}</Chip> </TextListItem>
-        <TextListItem>Templates Parameter Value Source: <Chip isReadOnly>{recipe.target_env}</Chip></TextListItem>
-        <TextListItem>Deploy Version Source: <Chip isReadOnly>{recipe.ref_env}</Chip></TextListItem>
-        <TextListItem>Options Dependencies Method: <Chip isReadOnly>{recipe.optional_deps_method}</Chip></TextListItem>
-    </TextList>
+    <ul>
+        <li>Deploy Frontends: {recipe.frontends ? <GreenCheck /> : <RedX />}</li>
+        <li>Release on fail: {recipe.no_release_on_fail ? <RedX /> : <GreenCheck />}</li>
+        <li>Get dependencies: {recipe.get_dependencies ? <GreenCheck /> : <RedX/>}</li>
+        <li>Single replicas: {recipe.single_replicas ? <GreenCheck /> : <RedX />}</li>
+        <li>Pool: <Label variant="outline" >{recipe.pool}</Label></li>
+        <li>Duration: <Label variant="outline" >{recipe.duration}</Label> </li>
+        <li>Templates Parameter Value Source: <Label variant="outline" >{recipe.target_env}</Label></li>
+        <li>Deploy Version Source: <Label variant="outline" >{recipe.ref_env}</Label></li>
+        <li>Options Dependencies Method: <Label variant="outline" >{recipe.optional_deps_method}</Label></li>
+    </ul>
 );
 
 export default function RecipeViewer({ recipe }) {
@@ -101,70 +98,70 @@ export default function RecipeViewer({ recipe }) {
             <GridItem span={5}>
                 <Stack hasGutter>
                     <StackItem>
-                        <TextContent>
-                            <Text component={TextVariants.h2}>
+                        <Content>
+                            <Content component={ContentVariants.h2}>
                                 Apps
-                            </Text>
-                        </TextContent>
+                            </Content>
+                        </Content>
                         <SelectedAppsChips appList={recipe.app_names}/>
                     </StackItem>
                     <StackItem>
-                        <TextContent>
-                            <Text component={TextVariants.h2}>
+                        <Content>
+                            <Content component={ContentVariants.h2}>
                                 Namespace
-                            </Text>
+                            </Content>
                             <Namespace namespace={recipe.namespace} />
-                        </TextContent>
+                        </Content>
                     </StackItem>
                     <StackItem>
-                        <TextContent>
-                            <Text component={TextVariants.h2}>Options</Text>
+                        <Content>
+                            <Content component={ContentVariants.h2}>Options</Content>
                             <AppDeployOptions recipe={recipe} />
-                        </TextContent>
+                        </Content>
                     </StackItem>
                 </Stack>
             </GridItem>
             <GridItem span={5}>
                 <Stack hasGutter>
                     <StackItem>
-                        <TextContent>
-                            <Text component={TextVariants.h2}>
+                        <Content>
+                            <Content component={ContentVariants.h2}>
                                 Preserve Resources
-                            </Text>
-                            <TextList>
+                            </Content>
+                            <Content component="ul">
                                 <PreserveResources resources={recipe.no_remove_resources} />
-                            </TextList>
-                        </TextContent>
+                            </Content>
+                        </Content>
                     </StackItem>
                     <StackItem>
-                        <TextContent>
-                            <Text component={TextVariants.h2}>
+                        <Content>
+                            <Content component={ContentVariants.h2}>
                                 Omit Dependencies
-                            </Text>
-                            <TextList>
+                            </Content>
+                            <Content component="ul">
                                 <OmitDependencies dependencies={recipe.remove_dependencies} />
-                            </TextList>
-                        </TextContent>
+                            </Content>
+                        </Content>
                     </StackItem>
                     <StackItem>
-                        <TextContent>
-                            <Text component={TextVariants.h2}>
+                        <Content>
+                            <Content component={ContentVariants.h2}>
                                 Set Parameters
-                            </Text>
-                            <TextList>
+                            </Content>
+                            <Content component="ul">
                                 <SetParameters parameters={recipe.set_parameter} />
-                            </TextList>
-                        </TextContent>
+                            </Content>
+                        </Content>
                     </StackItem>
                     <StackItem>
-                        <TextContent>
-                            <Text component={TextVariants.h2}>
+                        <Content>
+                            <Content component={ContentVariants.h2}>
                                 Image Tag Overrides
-                            </Text>
-                            <TextList>
+                            </Content>
+                            <Content component="ul">
                                 <ImageTagOverrides overrides={recipe.set_image_tag} />
-                            </TextList>
-                        </TextContent>
+                            </Content>
+                        </Content>
                     </StackItem>
                 </Stack>
             </GridItem>

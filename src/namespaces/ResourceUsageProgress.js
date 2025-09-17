@@ -4,11 +4,10 @@ import {
   ProgressVariant,
   ProgressMeasureLocation,
   Tooltip,
-  Text,
-  TextContent,
-  TextVariants,
+  Content,
+  ContentVariants,
   Skeleton,
-  Spinner
+  
 } from '@patternfly/react-core';
 
 const ResourceUsageProgress = ({ namespace, resource, showDetails = false }) => {
@@ -77,11 +76,11 @@ const ResourceUsageProgress = ({ namespace, resource, showDetails = false }) => 
   return (
     <div>
       {showDetails && (
-        <TextContent>
-          <Text component={TextVariants.h6}>
+        <Content>
+          <Content component={ContentVariants.h6}>
             {resource.toUpperCase()}
-          </Text>
-        </TextContent>
+          </Content>
+        </Content>
       )}
       <Tooltip content={tooltipContent}>
         <Progress
@@ -92,9 +91,9 @@ const ResourceUsageProgress = ({ namespace, resource, showDetails = false }) => 
         />
       </Tooltip>
       {showDetails && (
-        <TextContent>
-          <Text>{tooltipContent.trim().split('\n').map(line => <div key={line}>{line}</div>)}</Text>
-        </TextContent>
+        <Content>
+          <Content component="p">{tooltipContent.trim().split('\n').map(line => <div key={line}>{line}</div>)}</Content>
+        </Content>
       )}
     </div>
   );

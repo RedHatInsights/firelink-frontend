@@ -7,7 +7,7 @@ import {
   NavList,
   Masthead,
   MastheadMain,
-  MastheadBrand,
+  MastheadLogo,
   MastheadContent,
   PageSidebar,
   Toolbar,
@@ -23,7 +23,7 @@ import {
   Switch,
   Avatar,
   Button,
-  MastheadToggle
+  MastheadToggle, MastheadBrand
 } from "@patternfly/react-core";
 import { Outlet, useMatch, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -127,7 +127,7 @@ function App() {
           <Switch
             id="simple-switch"
             label="Dark"
-            labelOff="Light"
+            
             isChecked={darkMode}
             onChange={setDarkModeToggle}
             ouiaId="BasicSwitch"
@@ -156,16 +156,12 @@ function App() {
   const headerToolbar = (
     <Toolbar id="vertical-toolbar" isFullHeight="true">
       <ToolbarContent>
-        <ToolbarGroup align={{ default: "alignRight" }}>
+        <ToolbarGroup align={{ default: "alignEnd" }}>
         <ToolbarItem>
-            <Button variant="plain" onClick={handleDocsButton}>
-              Documentation
-            </Button>
+            <Button icon="Documentation" variant="plain" onClick={handleDocsButton} />
           </ToolbarItem>
           <ToolbarItem>
-            <Button variant="plain" onClick={handleReportIssueButton}>
-              Feedback
-            </Button>
+            <Button icon="Feedback" variant="plain" onClick={handleReportIssueButton} />
           </ToolbarItem>
           <ToolbarItem>{headerDropDown}</ToolbarItem>
         </ToolbarGroup>
@@ -175,20 +171,18 @@ function App() {
 
   const header = (
     <Masthead>
-      <MastheadToggle>
-        <Button variant="plain" onClick={() => {setSidebarOpen(!sidebarOpen)}} aria-label="Global navigation">
-          <BarsIcon />
-        </Button>
+      
+      <MastheadMain><MastheadToggle>
+        <Button icon={<BarsIcon />} variant="plain" onClick={() => {setSidebarOpen(!sidebarOpen)}} aria-label="Global navigation" />
       </MastheadToggle>
-      <MastheadMain>
-        <MastheadBrand
+        <MastheadBrand data-codemods><MastheadLogo data-codemods
           component="a"
           onClick={() => {
             navigate("/");
           }}
         >
           <ReactSVG src="/firelink-logo.svg" style={{ width: "8rem" }} />
-        </MastheadBrand>
+        </MastheadLogo></MastheadBrand>
       </MastheadMain>
       <MastheadContent>{headerToolbar}</MastheadContent>
     </Masthead>
@@ -264,7 +258,7 @@ function App() {
   );
 
   return (
-    <Page header={header} sidebar={sidebar}>
+    <Page masthead={header} sidebar={sidebar}>
       <Outlet />
     </Page>
   );

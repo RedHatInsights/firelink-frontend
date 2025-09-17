@@ -3,8 +3,10 @@ import { useState } from "react";
 
 import {
 	Select,
-	SelectOption
-} from '@patternfly/react-core/deprecated';
+	SelectOption,
+	SelectList,
+	MenuToggle
+} from '@patternfly/react-core';
 
 
 const availablePools = ['default','minimal','managed-kafka','real-managed-kafka']
@@ -16,44 +18,58 @@ const targetEnvironments = ["insights-ephemeral", "insight-stage", "insights-pro
 const DefaultPool = availablePools[0]
 const DefaultDuration = availableDurations[0]
 
-const SelectList = ({label, value, setValue, options}) => {
+const SelectListComponent = ({label, value, setValue, options}) => {
     const [isOpen, setIsOpen] = useState(false);
+    
+    const toggle = (toggleRef) => (
+        <MenuToggle ref={toggleRef} onClick={() => setIsOpen(!isOpen)} isExpanded={isOpen}>
+            {value || 'Select an option'}
+        </MenuToggle>
+    );
+
     return <React.Fragment>
         {label}
         <Select
+            id="select-basic"
             isOpen={isOpen}
-            onToggle={() => { setIsOpen(!isOpen) } } 
-            onSelect={(event, selection) => { setValue(selection) ; setIsOpen(false) } }
-            selections={value}>
-                {options.map((opt, index) => { return <SelectOption key={`${opt}-${index}`} value={opt}>
-                    {opt}
-                </SelectOption>})}
+            selected={value}
+            onSelect={(_event, selection) => { setValue(selection); setIsOpen(false); }}
+            onOpenChange={(isOpen) => setIsOpen(isOpen)}
+            toggle={toggle}
+        >
+            <SelectList>
+                {options.map((opt, index) => (
+                    <SelectOption key={`${opt}-${index}`} value={opt}>
+                        {opt}
+                    </SelectOption>
+                ))}
+            </SelectList>
         </Select>
     </React.Fragment>    
 }
 
 const PoolSelectList = ({value, setValue}) => {
-    return <SelectList label='Pool'  value={value} setValue={setValue} options={availablePools}/>
+    return <SelectListComponent label='Pool'  value={value} setValue={setValue} options={availablePools}/>
 }
 
 const DurationSelectList = ({value, setValue}) => {
-    return <SelectList label='Duration'  value={value} setValue={setValue} options={availableDurations}/>
+    return <SelectListComponent label='Duration'  value={value} setValue={setValue} options={availableDurations}/>
 }
 
 const OptionalDepsMethodSelectList = ({value, setValue}) => {
-    return <SelectList label='Optional Dependencies Method'  value={value} setValue={setValue} options={optionalDepsMethods}/>
+    return <SelectListComponent label='Optional Dependencies Method'  value={value} setValue={setValue} options={optionalDepsMethods}/>
 }
 
 const ReferenceEnvironmentSelectList = ({value, setValue, label}) => {
-    return <SelectList label={label}  value={value} setValue={setValue} options={referenceEnvironments}/>
+    return <SelectListComponent label={label}  value={value} setValue={setValue} options={referenceEnvironments}/>
 }
 
 const TargetEnvironmentSelectList = ({value, setValue}) => {
-    return <SelectList label='Template Parameter Value Source'  value={value} setValue={setValue} options={targetEnvironments}/>
+    return <SelectListComponent label='Template Parameter Value Source'  value={value} setValue={setValue} options={targetEnvironments}/>
 }
 
 export {
-    SelectList, 
+    SelectListComponent as SelectList, 
     PoolSelectList, 
     DurationSelectList, 
     OptionalDepsMethodSelectList, 

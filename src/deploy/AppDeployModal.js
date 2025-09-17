@@ -2,13 +2,14 @@ import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import io from "socket.io-client";
 import {
-  Button,
-  Modal,
-  ModalVariant,
-  Text,
-  Grid,
-  GridItem,
-} from "@patternfly/react-core";
+	Button,
+	Grid,
+	GridItem
+} from '@patternfly/react-core';
+import {
+	Modal,
+	ModalVariant
+} from '@patternfly/react-core/deprecated';
 import { Spinner } from "@patternfly/react-core";
 import CheckCircle from "@patternfly/react-icons/dist/js/icons/check-circle-icon";
 import TimesCircle from "@patternfly/react-icons/dist/js/icons/times-circle-icon";

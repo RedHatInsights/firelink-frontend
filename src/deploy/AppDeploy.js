@@ -4,7 +4,6 @@ import Loading from "../shared/Loading";
 import ErrorCard from "../shared/ErrorCard";
 import {
   Page,
-  PageSectionVariants,
   PageSection,
   Split,
   SplitItem,
@@ -12,12 +11,11 @@ import {
   TitleSizes,
   Wizard,
   WizardStep,
-  TextContent,
-  Text,
+  Content,
   Stack,
   StackItem,
   Alert,
-  TextVariants,
+  ContentVariants,
   Switch,
 } from "@patternfly/react-core";
 import { useSelector, useDispatch } from "react-redux";
@@ -151,7 +149,7 @@ export default function AppDeploy() {
   if (error !== null) {
     return (
         <Page>
-            <PageSection>
+            <PageSection hasBodyWrapper={false}>
                 <ErrorCard error={error} onRetry={handleRetry} />
             </PageSection>
         </Page>
@@ -160,7 +158,7 @@ export default function AppDeploy() {
 
   return (
     <Page>
-      <PageSection variant={PageSectionVariants.light}>
+      <PageSection hasBodyWrapper={false} >
         <Split>
           <SplitItem>
             <Title headingLevel="h1" size={TitleSizes["3xl"]}>
@@ -170,7 +168,7 @@ export default function AppDeploy() {
           <SplitItem isFilled />
         </Split>
       </PageSection>
-      <PageSection hasOverflowScroll>
+      <PageSection hasBodyWrapper={false} hasOverflowScroll>
         {isAppsEmpty || isNamespacesEmpty ? (
           <Loading message={loadingMessage()} />
         ) : (
@@ -216,21 +214,21 @@ export default function AppDeploy() {
             >
               <Stack hasGutter>
                 <StackItem>
-                  <TextContent>
-                    <Text component={TextVariants.h1}>
+                  <Content>
+                    <Content component={ContentVariants.h1}>
                       Preserve CPU & RAM for Apps or Components
-                    </Text>
-                  </TextContent>
+                    </Content>
+                  </Content>
                 </StackItem>
                 <StackItem>
-                  <TextContent>
-                    <Text>
+                  <Content>
+                    <Content component="p">
                       Bonfire removes CPU and memory resource requests and
                       limits by default. Select any ClowdApps and
                       ResourceTemplates you may want to preserve requests and
                       limits for. ClowdApps are prepended by "app:".
-                    </Text>
-                  </TextContent>
+                    </Content>
+                  </Content>
                 </StackItem>
                 <StackItem>
                   <Alert
@@ -255,21 +253,21 @@ export default function AppDeploy() {
             >
               <Stack hasGutter>
                 <StackItem>
-                  <TextContent>
-                    <Text component={TextVariants.h1}>
+                  <Content>
+                    <Content component={ContentVariants.h1}>
                       Select Dependencies to Omit
-                    </Text>
-                  </TextContent>
+                    </Content>
+                  </Content>
                 </StackItem>
                 <StackItem>
-                  <TextContent>
-                    <Text>
+                  <Content>
+                    <Content component="p">
                       Bonfire deploys all dependencies for your ClowdApps and
                       Resource Templates. If you wish to omit dependencies for a
                       ClowdApp or ResourceTemplate, select them here. ClowdApps
                       are prepended by "app:".
-                    </Text>
-                  </TextContent>
+                    </Content>
+                  </Content>
                 </StackItem>
                 <StackItem>
                   <ResourceSelector

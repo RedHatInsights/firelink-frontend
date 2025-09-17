@@ -7,15 +7,12 @@ import {
     SplitItem,
     Title,
     TitleSizes,
-    PageSectionVariants,
     Card,
     CardBody,
     Button,
     EmptyState,
     EmptyStateVariant,
     EmptyStateBody,
-    EmptyStateHeader,
-    EmptyStateIcon,
     Stack,
     StackItem,
 } from '@patternfly/react-core';
@@ -159,8 +156,7 @@ export default function Recipes() {
     };
 
     const NoRecipeLoaded = () => {
-        return <EmptyState variant={EmptyStateVariant.lg}>
-            <EmptyStateHeader titleText="No Recipe Loaded" headingLevel="h4" icon={<EmptyStateIcon icon={CubesIcon} />} />
+        return <EmptyState  headingLevel="h4" icon={CubesIcon}  titleText="No Recipe Loaded" variant={EmptyStateVariant.lg}>
             <EmptyStateBody>
                 Select a recipe from the left to view its details.
             </EmptyStateBody>
@@ -169,8 +165,7 @@ export default function Recipes() {
 
     const NoRecipes = () => {
         return <CardBody>
-            <EmptyState variant={EmptyStateVariant.lg}>
-                <EmptyStateHeader titleText="No Recipes Found" headingLevel="h4" icon={<EmptyStateIcon icon={CubesIcon} />} />
+            <EmptyState  headingLevel="h4" icon={CubesIcon}  titleText="No Recipes Found" variant={EmptyStateVariant.lg}>
                 <EmptyStateBody>
                     No recipes found. You can create a recipe by going through the Deploy wizard or by uploading a recipe file.
                 </EmptyStateBody>
@@ -179,7 +174,7 @@ export default function Recipes() {
     }
 
     return <Page>
-        <PageSection variant={PageSectionVariants.light}>
+        <PageSection hasBodyWrapper={false} >
             <Split hasGutter>
                 <SplitItem>
                     <Title headingLevel="h1" size={TitleSizes['3xl']}>
@@ -202,7 +197,7 @@ export default function Recipes() {
                 </SplitItem>
             </Split>
         </PageSection>
-        <PageSection>
+        <PageSection hasBodyWrapper={false}>
                 { recipeListIsEmpty ? <NoRecipes /> : 
                     <Card isFullHeight>
                         <CardBody>

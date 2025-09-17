@@ -4,7 +4,6 @@ import {
 	Radio,
 	Stack,
 	Page,
-	PageSectionVariants,
 	PageSection,
 	Split,
 	SplitItem,
@@ -30,8 +29,10 @@ import {
 } from '@patternfly/react-core';
 import {
 	Select,
-	SelectOption
-} from '@patternfly/react-core/deprecated';
+	SelectOption,
+	SelectList,
+	MenuToggle
+} from '@patternfly/react-core';
 import { useParams } from "react-router-dom";
 import AppDeployController from '../deploy/AppDeployControllerCard';
 import { useSelector, useDispatch } from 'react-redux';
@@ -301,7 +302,7 @@ export default function AppDeploy() {
     }
 
     return <Page>
-        <PageSection variant={PageSectionVariants.light}>
+        <PageSection hasBodyWrapper={false} >
             <Split>
                 <SplitItem>
                     <Title headingLevel="h1" size={TitleSizes['3xl']}>
@@ -311,7 +312,7 @@ export default function AppDeploy() {
                 <SplitItem isFilled/>
             </Split>
         </PageSection>
-        <PageSection>
+        <PageSection hasBodyWrapper={false}>
             <AppDeployUI />
         </PageSection>
     </Page> 

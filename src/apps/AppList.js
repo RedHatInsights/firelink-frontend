@@ -6,7 +6,6 @@ import {
   TextInput,
   Page,
   PageSection,
-  PageSectionVariants,
   Gallery,
   Split,
   SplitItem,
@@ -48,7 +47,7 @@ function AppList() {
   if (loading) {
     return (
       <Page>
-        <PageSection>
+        <PageSection hasBodyWrapper={false}>
           <Loading message="Fetching app list..." />
         </PageSection>
       </Page>
@@ -58,7 +57,7 @@ function AppList() {
   if (error) {
     return (
       <Page>
-        <PageSection>
+        <PageSection hasBodyWrapper={false}>
           <ErrorCard error={error} onRetry={handleRefresh} />
         </PageSection>
       </Page>
@@ -67,7 +66,7 @@ function AppList() {
 
   return (
     <Page>
-      <PageSection variant={PageSectionVariants.light}>
+      <PageSection hasBodyWrapper={false} >
         <Split hasGutter>
           <SplitItem>
             <Title headingLevel="h1" size={TitleSizes["3xl"]}>
@@ -80,7 +79,7 @@ function AppList() {
               isReversed="true"
               id="app-list-favorites"
               label="Show Favorites"
-              labelOff="Show Favorites"
+              
               isChecked={showFavorites}
               onChange={() => setShowFavorites(!showFavorites)}
             />
@@ -101,7 +100,7 @@ function AppList() {
           </SplitItem>
         </Split>
       </PageSection>
-      <PageSection hasOverflowScroll={true}>
+      <PageSection hasBodyWrapper={false} hasOverflowScroll={true}>
         <FadeInFadeOut>
           <Gallery hasGutter>
             {filteredApps.map((app, index) => (

@@ -3,7 +3,6 @@ import {
   Button,
   Page,
   PageSection,
-  PageSectionVariants,
   Split,
   SplitItem,
   Title,
@@ -110,7 +109,7 @@ const ClusterCard = () => {
   if (isLoading) {
     return (
       <Page>
-        <PageSection>
+        <PageSection hasBodyWrapper={false}>
           <Loading message="Loading cluster metrics..." />
         </PageSection>
       </Page>
@@ -119,7 +118,7 @@ const ClusterCard = () => {
 
   return (
     <Page>
-      <PageSection variant={PageSectionVariants.light}>
+      <PageSection hasBodyWrapper={false} >
         <Split hasGutter>
           <SplitItem>
             <Title headingLevel="h1" size={TitleSizes["3xl"]}>
@@ -139,7 +138,7 @@ const ClusterCard = () => {
           </SplitItem>
         </Split>
       </PageSection>
-      <PageSection hasOverflowScroll>
+      <PageSection hasBodyWrapper={false} hasOverflowScroll>
         <Card>
           <CardBody>
             <Stack hasGutter>

@@ -6,7 +6,6 @@ import {
   ListItem,
   Stack,
   Page,
-  PageSectionVariants,
   PageSection,
   Split,
   SplitItem,
@@ -144,7 +143,7 @@ export default function Root() {
 
   return (
     <Page>
-      <PageSection variant={PageSectionVariants.light}>
+      <PageSection hasBodyWrapper={false} >
         <Split hasGutter>
           <SplitItem>
             <Brand
@@ -168,7 +167,7 @@ export default function Root() {
           <SplitItem isFilled />
         </Split>
       </PageSection>
-      <PageSection>
+      <PageSection hasBodyWrapper={false}>
         <Pillars />
       </PageSection>
     </Page>
