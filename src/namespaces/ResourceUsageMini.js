@@ -9,15 +9,15 @@ import {
   Skeleton
 } from '@patternfly/react-core';
 import { useSelector } from 'react-redux';
-import { 
-  getNamespaceResources,
-  getNamespaceResourcesLoading 
+import {
+  getNamespaceResources
+  // getNamespaceResourcesLoading  // Currently unused
 
 } from '../store/ListSlice';
 
 const ResourceUsageMini = ({ namespace, resource, showDetails = false }) => {
   const data = useSelector(getNamespaceResources);
-  const loading = useSelector(getNamespaceResourcesLoading);
+  // const loading = useSelector(getNamespaceResourcesLoading); // Currently unused
   
 
   if (!data[namespace] && showDetails) {

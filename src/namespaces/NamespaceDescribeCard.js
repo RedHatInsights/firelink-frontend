@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useCallback} from 'react';
 import {
   Card,
   CardTitle,
@@ -16,14 +16,7 @@ const NamespaceDescriptionCard = ({namespace, onError = (error) => {}}) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    getNamespaceDescription();
-  }, []);
-  useEffect(() => {
-    getNamespaceDescription();
-  }, [namespace]);
-
-  const getNamespaceDescription = async () => {
+  const getNamespaceDescription = useCallback(async () => {
     const ns = namespace;
     setLoading(true);
     setError(null);
@@ -46,7 +39,14 @@ const NamespaceDescriptionCard = ({namespace, onError = (error) => {}}) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [namespace, onError]);
+
+  useEffect(() => {
+    getNamespaceDescription();
+  }, [getNamespaceDescription]);
+  useEffect(() => {
+    getNamespaceDescription();
+  }, [namespace, getNamespaceDescription]);
 
   const formatTitle = (title) => {
     return title.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');

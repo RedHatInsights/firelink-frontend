@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import Loading from "../shared/Loading";
 import ErrorCard from "../shared/ErrorCard";
@@ -62,12 +62,13 @@ export default function AppDeploy() {
   const setNoRemoveResourcesAction = (value) => {
     dispatch(setNoRemoveResources(value));
   };
-  const setRemoveDependenciesAction = (value) => {
+  const setRemoveDependenciesAction = useCallback((value) => {
     dispatch(setRemoveDependencies(value));
-  };
-  const setRequesterAction = (value) => {
+  }, [dispatch]);
+  
+  const setRequesterAction = useCallback((value) => {
     dispatch(setAppDeployRequester(value));
-  };
+  }, [dispatch]);
 
   const [advancedMode, setAdvancedMode] = useState(false);
   const [showNamespaceStep, setShowNamespaceStep] = useState(false);

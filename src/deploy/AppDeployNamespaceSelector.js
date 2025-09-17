@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import Loading from '../shared/Loading';
 import {
 	Radio,
 	Stack,
@@ -32,7 +31,7 @@ export default function AppDeployNamespaceSelector() {
     // Set the namespace in the store when the selected reservation changes
     useEffect(() => {
         dispatch(setNamespace(selectedReservation));
-    }, [selectedReservation])
+    }, [selectedReservation, dispatch])
 
     // If the namespace select is hidden, set the namespace to an empty string
     // If the namespace select is shown, set the namespace to the first reservation
@@ -44,7 +43,7 @@ export default function AppDeployNamespaceSelector() {
         if (myReservations.length > 0) {
             setSelectedReservation(myReservations[0].namespace);
         }
-    }, [showNamespaceSelect])
+    }, [showNamespaceSelect, dispatch, myReservations])
 
     const MyReservationSelect = () => {
         if (showNamespaceSelect === false) {
@@ -59,15 +58,15 @@ export default function AppDeployNamespaceSelector() {
         </FormSelect>
     }
 
-    const NamespaceSelection = () => {
-        if ( myReservations.length === 0 ) {
-            return <React.Fragment>
-                <p>You have no namespaces reserved. A new namespace will be reserved for you.</p>
-            </React.Fragment>
-        } else {
-            return 
-        }
-    }
+    // const NamespaceSelection = () => {
+    //     if ( myReservations.length === 0 ) {
+    //         return <React.Fragment>
+    //             <p>You have no namespaces reserved. A new namespace will be reserved for you.</p>
+    //         </React.Fragment>
+    //     } else {
+    //         return 
+    //     }
+    // } // Currently unused
 
     return <Stack hasGutter>
         <StackItem>

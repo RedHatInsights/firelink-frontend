@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Label, LabelGroup } from '@patternfly/react-core';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import {
     getAppNames,

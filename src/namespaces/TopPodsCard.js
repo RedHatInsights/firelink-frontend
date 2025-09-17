@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   Card,
@@ -48,22 +48,7 @@ const PodsTableCard = ({ namespace, onError = (_error) => {} }) => {
 
   const topPodsFromStore = useSelector(getNamespaceTopPods);
 
-  useEffect(() => {
-    //fetchData();
-    const interval = setInterval(() => {
-      setNextRefresh((prev) => prev - 1);
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    if (nextRefresh === 0) {
-      fetchData();
-      setNextRefresh(10);
-    }
-  }, [nextRefresh]);
-
-  const fetchData = () => {
+  const fetchData = useCallback(() => {
     if (!namespace) {
       return;
     }
@@ -79,11 +64,26 @@ const PodsTableCard = ({ namespace, onError = (_error) => {} }) => {
         setError(error);
         onError(error);
       });
-  };
+  }, [namespace, dispatch, onError]);
+
+  useEffect(() => {
+    //fetchData();
+    const interval = setInterval(() => {
+      setNextRefresh((prev) => prev - 1);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (nextRefresh === 0) {
+      fetchData();
+      setNextRefresh(10);
+    }
+  }, [nextRefresh, fetchData]);
 
   useEffect(() => {
     fetchData();
-  }, [namespace]);
+  }, [namespace, fetchData]);
 
   useEffect(() => {
     setTopPods(topPodsFromStore);

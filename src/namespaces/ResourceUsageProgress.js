@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   Progress,
   ProgressVariant,
@@ -15,7 +15,7 @@ const ResourceUsageProgress = ({ namespace, resource, showDetails = false }) => 
   const [loading, setLoading] = useState(true);
   const [initialLoad, setInitialLoad] = useState(true); // New state variable for tracking initial load
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     if (initialLoad) {
       setLoading(true);
     }
@@ -32,13 +32,13 @@ const ResourceUsageProgress = ({ namespace, resource, showDetails = false }) => 
       setLoading(false);
       setInitialLoad(false); // Set initial load to false after the first fetch
     }
-  };
+  }, [namespace, initialLoad]);
 
   useEffect(() => {
     fetchData();
     const interval = setInterval(fetchData, 10000);
     return () => clearInterval(interval);
-  }, [namespace]);
+  }, [namespace, fetchData]);
 
   if (loading && initialLoad) { // Only show the skeleton during the initial load
     return <Skeleton />;

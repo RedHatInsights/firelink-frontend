@@ -35,7 +35,7 @@ import {
 } from "./store/AppSlice";
 import { setAppDeployRequester } from "./store/AppDeploySlice";
 import { ReactSVG } from "react-svg";
-import { loadNamespaceResources, loadNamespaces } from "./store/ListSlice";
+// Removed unused imports: loadNamespaceResources, loadNamespaces
 import { BarsIcon } from "@patternfly/react-icons";
 
 function App() {
@@ -65,7 +65,7 @@ function App() {
 
   useEffect(() => {
     dispatch(setAppDeployRequester(requester));
-  }, [requester]);
+  }, [requester, dispatch]);
 
   useEffect(() => {
     if (darkMode) {

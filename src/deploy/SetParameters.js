@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useMemo, useCallback} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
     TreeView,
@@ -26,7 +26,7 @@ import ParamInput from "./ParamInput";
 
 export default function SetParameters() {
 
-    const PARAMETER_SELECT_CARD_STYLE = {height: "30rem", overflow: "auto"}
+    const PARAMETER_SELECT_CARD_STYLE = useMemo(() => ({height: "30rem", overflow: "auto"}), []);
 
     const dispatch = useDispatch();
 
@@ -34,9 +34,9 @@ export default function SetParameters() {
     const selectedParameters = useSelector(getStoreSelectedParameters);
     const apps = useSelector(getAppDeployApps);
 
-    const setStoreSetParameter = (param) => dispatch(setSetParameter(param));
-    const createOptionsFromApps = (apps) => dispatch(createStoreOptionsFromApps(apps));
-    const setSelectedParameters = (params) => dispatch(setStoreSelectedParameters(params));
+    const setStoreSetParameter = useCallback((param) => dispatch(setSetParameter(param)), [dispatch]);
+    const createOptionsFromApps = useCallback((apps) => dispatch(createStoreOptionsFromApps(apps)), [dispatch]);
+    const setSelectedParameters = useCallback((params) => dispatch(setStoreSelectedParameters(params)), [dispatch]);
 
 
     const [cardBodyStyle, setCardBodyStyle] = useState(PARAMETER_SELECT_CARD_STYLE)
@@ -49,7 +49,7 @@ export default function SetParameters() {
         if (apps.length > 0) {
             createOptionsFromApps(apps)
         }
-    }, [apps])
+    }, [apps, createOptionsFromApps])
 
     useEffect(() => {
         // Need to send the selected params and their values to the store
@@ -59,7 +59,7 @@ export default function SetParameters() {
             return acc;
         }, {});
         setStoreSetParameter(selectedParams);
-    }, [selectedParameters]);
+    }, [selectedParameters, setStoreSetParameter]);
     
 
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ImageTagInput from './ImageTagInput';
 import { Stack, StackItem, Title, Content, Split, SplitItem, Button } from '@patternfly/react-core';
 import {

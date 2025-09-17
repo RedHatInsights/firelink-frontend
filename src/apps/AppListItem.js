@@ -40,7 +40,7 @@ function AppComponentListLinks(components) {
 }
 
 export default function AppListItem({ app, showFavorites }) {
-  const [expanded, setExpanded] = useState(false);
+  // const [expanded, setExpanded] = useState(false); // Currently unused
   const compos = AppComponentListLinks(app.components);
   const key = `def-list-toggle-${app.name}`;
   const navigate = useNavigate();
