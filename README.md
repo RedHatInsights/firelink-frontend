@@ -1,6 +1,7 @@
 # Firelink Frontend
 Frontend React SPA for the Firelink project: a web GUI for Bonfire. See the [firelink-backend](https://github.com/RedHatInsights/firelink-backend) for the other half of this app.
 
+
 ## Development Setup
 You'll need node installed. 
 ```bash
