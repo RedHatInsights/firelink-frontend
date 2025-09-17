@@ -21,8 +21,8 @@ const Namespace = ({ namespace }) => {
     return namespace;
 };
 
-const GreenCheck = () => <CheckCircleIcon style={{ color: "green" }} />;
-const RedX = () => <TimesCircleIcon style={{ color: "red" }} />;
+const GreenCheck = () => <CheckCircleIcon style={{ color: "var(--pf-t--global--color--nonstatus--green--default)" }} />;
+const RedX = () => <TimesCircleIcon style={{ color: "var(--pf-t--global--color--nonstatus--red--default)" }} />;
 
 const PreserveResources = ({ resources }) => {
     if (resources.length === 0) {

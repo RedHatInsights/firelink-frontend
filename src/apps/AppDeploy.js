@@ -3,7 +3,6 @@ import Loading from '../shared/Loading';
 import {
 	Radio,
 	Stack,
-	Page,
 	PageSection,
 	Split,
 	SplitItem,
@@ -301,8 +300,8 @@ export default function AppDeploy() {
         </Grid>
     }
 
-    return <Page>
-        <PageSection hasBodyWrapper={false} >
+    return <React.Fragment>
+        <PageSection>
             <Split>
                 <SplitItem>
                     <Title headingLevel="h1" size={TitleSizes['3xl']}>
@@ -312,8 +311,8 @@ export default function AppDeploy() {
                 <SplitItem isFilled/>
             </Split>
         </PageSection>
-        <PageSection hasBodyWrapper={false}>
+        <PageSection>
             <AppDeployUI />
         </PageSection>
-    </Page> 
+    </React.Fragment> 
 }

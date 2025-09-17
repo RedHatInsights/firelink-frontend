@@ -5,7 +5,6 @@ import {
   List,
   ListItem,
   Stack,
-  Page,
   PageSection,
   Split,
   SplitItem,
@@ -42,11 +41,11 @@ export default function Root() {
     return (
       <React.Fragment>
         <FadeInFadeOut>
-          <Grid hasGutter>
+          <Grid hasGutter style={{ width: "100%" }}>
             <GridItem span={4}>
               <Card
                 className="pf-u-box-shadow-md"
-                style={{ minHeight: "100%" }}
+                style={{ minHeight: "20rem", height: "100%" }}
               >
                 <CardTitle>
                   <Title headingLevel="h3" size={TitleSizes["3x1"]}>
@@ -77,7 +76,7 @@ export default function Root() {
               </Card>
             </GridItem>
             <GridItem span={4}>
-              <Card style={{ minHeight: "100%" }}>
+              <Card style={{ minHeight: "20rem", height: "100%" }}>
                 <CardTitle>
                   <Title headingLevel="h3" size={TitleSizes["3x1"]}>
                     <CloudUpload /> Deploy
@@ -106,7 +105,7 @@ export default function Root() {
               </Card>
             </GridItem>
             <GridItem span={4}>
-              <Card style={{ minHeight: "100%" }}>
+              <Card style={{ minHeight: "20rem", height: "100%" }}>
                 <CardTitle>
                   <Title headingLevel="h3" size={TitleSizes["3x1"]}>
                     <Code /> Develop
@@ -142,8 +141,8 @@ export default function Root() {
   };
 
   return (
-    <Page>
-      <PageSection hasBodyWrapper={false} >
+    <React.Fragment>
+      <PageSection>
         <Split hasGutter>
           <SplitItem>
             <Brand
@@ -167,9 +166,9 @@ export default function Root() {
           <SplitItem isFilled />
         </Split>
       </PageSection>
-      <PageSection hasBodyWrapper={false}>
+      <PageSection isFilled>
         <Pillars />
       </PageSection>
-    </Page>
+    </React.Fragment>
   );
 }

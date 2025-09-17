@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
   Button,
-  Page,
   PageSection,
   Split,
   SplitItem,
@@ -37,11 +36,16 @@ const ClusterCard = () => {
           `Something went wrong loading the cluster memory usage metrics.`
         );
       }
+      const contentType = response.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        throw new Error("Server returned non-JSON response for memory usage");
+      }
       const data = await response.json();
       setMemoryUsage(data);
     } catch (error) {
       console.error("Error fetching cluster memory usage:", error);
-      throw error;
+      // Don't set memory usage data on error, just log it
+      setMemoryUsage(null);
     }
   }
 
@@ -54,11 +58,16 @@ const ClusterCard = () => {
           `Something went wrong loading the cluster CPU usage metrics.`
         );
       }
+      const contentType = response.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        throw new Error("Server returned non-JSON response for CPU usage");
+      }
       const data = await response.json();
       setCpuUsage(data);
     } catch (error) {
       console.error("Error fetching cluster CPU usage:", error);
-      throw error;
+      // Don't set CPU usage data on error, just log it
+      setCpuUsage(null);
     }
   };
 
@@ -70,6 +79,10 @@ const ClusterCard = () => {
         throw new Error(
           `Something went wrong loading the cluster resource metrics.`
         );
+      }
+      const contentType = response.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        throw new Error("Server returned non-JSON response for top nodes");
       }
       const data = await response.json();
       return data;
@@ -85,6 +98,9 @@ const ClusterCard = () => {
     try {
       const data = await fetchTopNodes();
       setTopNodes(data);
+      // Also retry loading the CPU and memory usage
+      await fetchClusterCPUUsage();
+      await fetchClusterMemoryUsage();
       setIsLoading(false);
     } catch (error) {
       setError(error.message);
@@ -97,9 +113,31 @@ const ClusterCard = () => {
   }
 
   useEffect(() => {
-    loadTopNodes();
-    fetchClusterCPUUsage();
-    fetchClusterMemoryUsage();
+    const loadAllClusterData = async () => {
+      setIsLoading(true);
+      setError(null);
+      try {
+        // Load all cluster data, but continue even if some fail
+        const [topNodesData] = await Promise.allSettled([
+          fetchTopNodes(),
+          fetchClusterCPUUsage(),
+          fetchClusterMemoryUsage(),
+        ]);
+        
+        // Handle top nodes data
+        if (topNodesData.status === 'fulfilled') {
+          setTopNodes(topNodesData.value);
+        }
+        
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error loading cluster data:", error);
+        setError("Failed to load cluster metrics. Please check if the backend is running and try again.");
+        setIsLoading(false);
+      }
+    };
+    
+    loadAllClusterData();
   }, []);
 
   if (error) {
@@ -108,17 +146,15 @@ const ClusterCard = () => {
 
   if (isLoading) {
     return (
-      <Page>
-        <PageSection hasBodyWrapper={false}>
-          <Loading message="Loading cluster metrics..." />
-        </PageSection>
-      </Page>
+      <PageSection>
+        <Loading message="Loading cluster metrics..." />
+      </PageSection>
     );
   }
 
   return (
-    <Page>
-      <PageSection hasBodyWrapper={false} >
+    <React.Fragment>
+      <PageSection>
         <Split hasGutter>
           <SplitItem>
             <Title headingLevel="h1" size={TitleSizes["3xl"]}>
@@ -138,7 +174,7 @@ const ClusterCard = () => {
           </SplitItem>
         </Split>
       </PageSection>
-      <PageSection hasBodyWrapper={false} hasOverflowScroll>
+      <PageSection hasOverflowScroll>
         <Card>
           <CardBody>
             <Stack hasGutter>
@@ -155,7 +191,7 @@ const ClusterCard = () => {
           </CardBody>
         </Card>
       </PageSection>
-    </Page>
+    </React.Fragment>
   );
 };
 

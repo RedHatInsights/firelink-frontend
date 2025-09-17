@@ -17,9 +17,6 @@ import {
     setSetParameter
 } from "../store/AppDeploySlice";
 import {
-    getDarkMode
-} from "../store/AppSlice";
-import {
     createStoreOptionsFromApps,
     getStoreOptions,
     getStoreSelectedParameters,
@@ -29,16 +26,13 @@ import ParamInput from "./ParamInput";
 
 export default function SetParameters() {
 
-    const DARK_GRAY = "#26292d";
-    const WHITE = "#FFFFFF";
-    const PARAMETER_SELECT_CARD_STYLE = {height: "30rem", overflow: "auto", backgroundColor: "#FFFFFF"}
+    const PARAMETER_SELECT_CARD_STYLE = {height: "30rem", overflow: "auto"}
 
     const dispatch = useDispatch();
 
     const options = useSelector(getStoreOptions);
     const selectedParameters = useSelector(getStoreSelectedParameters);
     const apps = useSelector(getAppDeployApps);
-    const darkMode = useSelector(getDarkMode);
 
     const setStoreSetParameter = (param) => dispatch(setSetParameter(param));
     const createOptionsFromApps = (apps) => dispatch(createStoreOptionsFromApps(apps));
@@ -48,9 +42,8 @@ export default function SetParameters() {
     const [cardBodyStyle, setCardBodyStyle] = useState(PARAMETER_SELECT_CARD_STYLE)
 
     useEffect(() => {
-        const color = darkMode ? DARK_GRAY : WHITE
-        setCardBodyStyle({...PARAMETER_SELECT_CARD_STYLE, backgroundColor: color})
-    }, [darkMode])
+        setCardBodyStyle(PARAMETER_SELECT_CARD_STYLE)
+    }, [PARAMETER_SELECT_CARD_STYLE])
 
     useEffect(() => {
         if (apps.length > 0) {

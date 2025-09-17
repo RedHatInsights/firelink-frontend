@@ -1,7 +1,6 @@
-import { React, useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import {
-    Page,
     PageSection,
     Split,
     SplitItem,
@@ -85,7 +84,7 @@ export default function Recipes() {
         return str
           .toLowerCase() // Convert to lowercase
           .replace(/\s+/g, '_') // Replace spaces with underscores
-          .replace(/[<>:"\/\\|?*]+/g, ''); // Remove invalid filesystem characters
+          .replace(/[<>:"/\\|?*]+/g, ''); // Remove invalid filesystem characters
       };
 
     const downloadRecipe = () => {
@@ -173,8 +172,8 @@ export default function Recipes() {
         </CardBody>
     }
 
-    return <Page>
-        <PageSection hasBodyWrapper={false} >
+    return <React.Fragment>
+        <PageSection>
             <Split hasGutter>
                 <SplitItem>
                     <Title headingLevel="h1" size={TitleSizes['3xl']}>
@@ -197,7 +196,7 @@ export default function Recipes() {
                 </SplitItem>
             </Split>
         </PageSection>
-        <PageSection hasBodyWrapper={false}>
+        <PageSection>
                 { recipeListIsEmpty ? <NoRecipes /> : 
                     <Card isFullHeight>
                         <CardBody>
@@ -236,5 +235,5 @@ export default function Recipes() {
                     </Card>
                 }
         </PageSection>
-    </Page> 
+    </React.Fragment> 
 }

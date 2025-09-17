@@ -69,9 +69,9 @@ function App() {
 
   useEffect(() => {
     if (darkMode) {
-      document.documentElement.classList.add("pf-v5-theme-dark");
+      document.documentElement.classList.add("pf-v6-theme-dark");
     } else {
-      document.documentElement.classList.remove("pf-v5-theme-dark");
+      document.documentElement.classList.remove("pf-v6-theme-dark");
     }
   }, [darkMode]);
 

@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   Button,
-  Page,
   Split,
   PageSection,
   InputGroup,
@@ -59,9 +58,9 @@ function NamespaceDescribe() {
       if (inputRef.current) {
         inputRef.current.focus();
       }
-    }, [namespaceInput]);
+    }, []);
     return (
-      <PageSection hasBodyWrapper={false} >
+      <PageSection>
         <Split>
           <SplitItem>
             <Title headingLevel="h1" size={TitleSizes["3xl"]}>
@@ -92,30 +91,30 @@ function NamespaceDescribe() {
 
   if (namespace === "") {
     return (
-      <Page>
+      <React.Fragment>
         <ToolBar />
-        <PageSection hasBodyWrapper={false}>
+        <PageSection>
           <NoNamespaceLoaded />
         </PageSection>
-      </Page>
+      </React.Fragment>
     );
   }
 
   if (error) {
     return (
-      <Page>
+      <React.Fragment>
         <ToolBar />
-        <PageSection hasBodyWrapper={false} isCenterAligned={true}>
+        <PageSection isCenterAligned={true}>
           <ErrorCard error={error.message} onRetry={buttonClickHandler} />
         </PageSection>
-      </Page>
+      </React.Fragment>
     );
   }
 
   return (
-    <Page>
+    <React.Fragment>
       <ToolBar />
-      <PageSection hasBodyWrapper={false} isCenterAligned={true} hasOverflowScroll={true}>
+      <PageSection isCenterAligned={true} hasOverflowScroll={true}>
         <Stack hasGutter>
           <StackItem>
             <NamespaceResourcesCard namespace={namespace} />
@@ -135,7 +134,7 @@ function NamespaceDescribe() {
           </StackItem>
         </Stack>
       </PageSection>
-    </Page>
+    </React.Fragment>
   );
 }
 

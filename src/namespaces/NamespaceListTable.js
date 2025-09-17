@@ -227,16 +227,16 @@ export default function NamespaceListTable({
                 </Td>
                 <Td textCenter dataLabel={columnNames.reserved}>
                   {namespace.reserved ? (
-                    <CheckCircleIcon style={{ color: "green" }} />
+                    <CheckCircleIcon style={{ color: "var(--pf-t--global--color--nonstatus--green--default)" }} />
                   ) : (
                     ""
                   )}
                 </Td>
                 <Td textCenter dataLabel={columnNames.status}>
                   {namespace.status ? (
-                    <CheckCircleIcon style={{ color: "green" }} />
+                    <CheckCircleIcon style={{ color: "var(--pf-t--global--color--nonstatus--green--default)" }} />
                   ) : (
-                    <TimesCircleIcon style={{ color: "red" }} />
+                    <TimesCircleIcon style={{ color: "var(--pf-t--global--color--nonstatus--red--default)" }} />
                   )}
                 </Td>
                 <Td textCenter dataLabel={columnNames.cpu}>

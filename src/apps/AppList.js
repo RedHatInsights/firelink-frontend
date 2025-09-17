@@ -4,7 +4,6 @@ import {
   Title,
   TitleSizes,
   TextInput,
-  Page,
   PageSection,
   Gallery,
   Split,
@@ -32,7 +31,7 @@ function AppList() {
     if (apps.length === 0) {
       dispatch(loadApps());
     }
-  }, [dispatch]);
+  }, [dispatch, apps.length]);
 
   useEffect(() => {
     setFilteredApps(
@@ -46,27 +45,23 @@ function AppList() {
 
   if (loading) {
     return (
-      <Page>
-        <PageSection hasBodyWrapper={false}>
-          <Loading message="Fetching app list..." />
-        </PageSection>
-      </Page>
+      <PageSection>
+        <Loading message="Fetching app list..." />
+      </PageSection>
     );
   }
 
   if (error) {
     return (
-      <Page>
-        <PageSection hasBodyWrapper={false}>
-          <ErrorCard error={error} onRetry={handleRefresh} />
-        </PageSection>
-      </Page>
+      <PageSection>
+        <ErrorCard error={error} onRetry={handleRefresh} />
+      </PageSection>
     );
   }
 
   return (
-    <Page>
-      <PageSection hasBodyWrapper={false} >
+    <React.Fragment>
+      <PageSection>
         <Split hasGutter>
           <SplitItem>
             <Title headingLevel="h1" size={TitleSizes["3xl"]}>
@@ -100,7 +95,7 @@ function AppList() {
           </SplitItem>
         </Split>
       </PageSection>
-      <PageSection hasBodyWrapper={false} hasOverflowScroll={true}>
+      <PageSection hasOverflowScroll={true}>
         <FadeInFadeOut>
           <Gallery hasGutter>
             {filteredApps.map((app, index) => (
@@ -113,7 +108,7 @@ function AppList() {
           </Gallery>
         </FadeInFadeOut>
       </PageSection>
-    </Page>
+    </React.Fragment>
   );
 }
 

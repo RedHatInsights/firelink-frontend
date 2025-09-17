@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import Loading from "../shared/Loading";
 import ErrorCard from "../shared/ErrorCard";
 import {
-  Page,
   PageSection,
   Split,
   SplitItem,
@@ -78,7 +77,7 @@ export default function AppDeploy() {
     dispatch(clearAll());
     dispatch(clearAppDeployOptions());
     setRequesterAction(requester);
-  }, []);
+  }, [dispatch, requester, setRequesterAction]);
 
   useEffect(() => {
     if (isAppsEmpty) {
@@ -121,7 +120,7 @@ export default function AppDeploy() {
       dispatch(addOrRemoveApp(appObj));
       dispatch(addOrRemoveAppName(appObj.name));
     }
-  }, [appParam, dispatch, isAppsEmpty]);
+  }, [appParam, dispatch, isAppsEmpty, apps]);
 
   const loadingMessage = () => {
     if (isAppsEmpty && isNamespacesEmpty) {
@@ -148,17 +147,15 @@ export default function AppDeploy() {
 
   if (error !== null) {
     return (
-        <Page>
-            <PageSection hasBodyWrapper={false}>
-                <ErrorCard error={error} onRetry={handleRetry} />
-            </PageSection>
-        </Page>
+      <PageSection>
+        <ErrorCard error={error} onRetry={handleRetry} />
+      </PageSection>
     )
   }
 
   return (
-    <Page>
-      <PageSection hasBodyWrapper={false} >
+    <React.Fragment>
+      <PageSection>
         <Split>
           <SplitItem>
             <Title headingLevel="h1" size={TitleSizes["3xl"]}>
@@ -168,7 +165,7 @@ export default function AppDeploy() {
           <SplitItem isFilled />
         </Split>
       </PageSection>
-      <PageSection hasBodyWrapper={false} hasOverflowScroll>
+      <PageSection hasOverflowScroll>
         {isAppsEmpty || isNamespacesEmpty ? (
           <Loading message={loadingMessage()} />
         ) : (
@@ -303,6 +300,6 @@ export default function AppDeploy() {
           </Wizard>
         )}
       </PageSection>
-    </Page>
+    </React.Fragment>
   );
 }

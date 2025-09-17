@@ -127,12 +127,12 @@ export default function AppDeployModal({
       return <Spinner size="md" />;
     }
     if (response.error === true) {
-      return <TimesCircle color="#FF0000" />;
+      return <TimesCircle style={{ color: "var(--pf-t--global--color--nonstatus--red--default)" }} />;
     }
     if (response.completed === true) {
-      return <CheckCircle color="#00FF00" />;
+      return <CheckCircle style={{ color: "var(--pf-t--global--color--nonstatus--green--default)" }} />;
     }
-    return <InfoCircle color="#00AAFF" />;
+    return <InfoCircle style={{ color: "var(--pf-t--global--color--nonstatus--blue--default)" }} />;
   };
 
   const close = () => {

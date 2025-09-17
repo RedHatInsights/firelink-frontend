@@ -111,7 +111,7 @@ export default function AppListItem({ app, showFavorites }) {
           <Split>
               <SplitItem isFilled></SplitItem>
               <SplitItem>
-                  <div style={{background: background, width: "2.5em", height: "2.5em", borderRadius: "10%", marginRight: "1em", color: "black", padding: "0.1em"}}>
+                  <div style={{background: background, width: "2.5em", height: "2.5em", borderRadius: "10%", marginRight: "1em", color: "var(--pf-t--global--text--color--inverse)", padding: "0.1em"}}>
                       <Title headingLevel="h3" size={TitleSizes["3x1"]} >
                           {appIconName() }
                       </Title>
