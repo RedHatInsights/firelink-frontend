@@ -1,0 +1,4 @@
+/* Fix for consistent page content height - account for padding/margins */
+.pf-v6-c-page__main {
+  min-height: calc(100vh - var(--pf-v6-c-masthead--Height, 80px) - 4rem);
+}
