@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import "./App.css";
 import {
   Page,
   Nav,
@@ -181,7 +182,7 @@ function App() {
             navigate("/");
           }}
         >
-          <ReactSVG src="/firelink-logo.svg" style={{ width: "8rem" }} />
+          <ReactSVG src="/firelink-logo.svg" className="firelink-logo" style={{ width: "8rem" }} />
         </MastheadLogo></MastheadBrand>
       </MastheadMain>
       <MastheadContent>{headerToolbar}</MastheadContent>

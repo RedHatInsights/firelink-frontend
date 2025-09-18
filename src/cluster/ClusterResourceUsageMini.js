@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Progress,
-  ProgressVariant,
   ProgressMeasureLocation,
   Tooltip,
   Content,
@@ -13,8 +12,7 @@ const ClusterResourceUsageMini = ({ metrics, showDetails = false }) => {
   ).value;
   const usage = metrics.find((metric) => metric.type === "usage").value;
   const capacity = metrics.find((metric) => metric.type === "capacity").value;
-  const variant =
-    usage_percent > 80 ? ProgressVariant.danger : ProgressVariant.success;
+  // Removed variant logic - PatternFly 6 doesn't allow hiding status icons while keeping colors
 
   const tooltipContent = `
     Usage: ${usage} 
@@ -32,7 +30,6 @@ const ClusterResourceUsageMini = ({ metrics, showDetails = false }) => {
               ? ProgressMeasureLocation.outside
               : ProgressMeasureLocation.none
           }
-          variant={variant}
           label={showDetails ? `${usage_percent.toFixed(2)}%` : ""}
         />
       </Tooltip>

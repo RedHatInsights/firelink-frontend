@@ -44,11 +44,7 @@ function AppList() {
   };
 
   if (loading) {
-    return (
-      <PageSection>
-        <Loading message="Fetching app list..." />
-      </PageSection>
-    );
+    return <Loading message="Fetching app list..." />;
   }
 
   if (error) {

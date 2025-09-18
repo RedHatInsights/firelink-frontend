@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   Progress,
-  ProgressVariant,
   ProgressMeasureLocation,
   Tooltip,
   Content,
@@ -32,10 +31,7 @@ const ResourceUsageMini = ({ namespace, resource, showDetails = false }) => {
   const requests = data[namespace].requests[resource];
   const limits = data[namespace].limits[resource];
 
-  let variant = ProgressVariant.success;
-  if (usage > requests) {
-    variant = usage > limits * 0.8 ? ProgressVariant.danger : ProgressVariant.warning;
-  }
+  // Removed variant logic - PatternFly 6 doesn't allow hiding status icons while keeping colors
 
   const percentage = (usage / limits) * 100;
   const usagePercentageOfRequests = (usage / requests) * 100;
@@ -65,7 +61,6 @@ const ResourceUsageMini = ({ namespace, resource, showDetails = false }) => {
         <Progress
           value={percentage}
           measureLocation={showDetails ? ProgressMeasureLocation.outside : ProgressMeasureLocation.none}
-          variant={variant}
           label={showDetails ? `${percentage.toFixed(2)}%` : ''}
         />
       </Tooltip>
