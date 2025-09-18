@@ -1,16 +1,18 @@
 import React, { useEffect } from "react";
 import { useState} from "react";
-import { 
-    Button, 
-    Modal, 
-    ModalVariant, 
-    InputGroup,
-    TextInput,
-    Stack,
-    StackItem,
-    TextContent,
-    Text
+import {
+	Button,
+	InputGroup,
+	TextInput,
+	Stack,
+	StackItem,
+	Content,
+	
 } from '@patternfly/react-core';
+import {
+	Modal,
+	ModalVariant
+} from '@patternfly/react-core/deprecated';
 import {
     getAppDeploySlice
 } from '../store/AppDeploySlice';
@@ -82,11 +84,11 @@ export default function AppDeploySaveRecipeModal({buttonLabel, disabled, buttonV
         actions={modalActions}>
             <Stack hasGutter>
                 <StackItem>
-                    <TextContent>
-                        <Text>
+                    <Content>
+                        <Content component="p">
                             Save the deployment options as a recipe for future use.
-                        </Text>
-                    </TextContent>
+                        </Content>
+                    </Content>
                 </StackItem>
                 <StackItem>
                     <InputGroup>

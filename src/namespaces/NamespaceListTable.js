@@ -21,7 +21,7 @@ import CogIcon from "@patternfly/react-icons/dist/esm/icons/cog-icon";
 import CheckCircleIcon from "@patternfly/react-icons/dist/esm/icons/check-circle-icon";
 import TimesCircleIcon from "@patternfly/react-icons/dist/esm/icons/times-circle-icon";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { getRequester } from "../store/AppSlice";
 
 import Loading from "../shared/Loading";
@@ -56,13 +56,13 @@ export default function NamespaceListTable({
   showJustMyReservations,
   onRelease
 }) {
-  const dispatch = useDispatch();
+  // dispatch no longer needed since it was unused
 
   const requester = useSelector(getRequester);
 
   const [filteredNamespaces, setFilteredNamespaces] = useState(namespaces);
 
-  const [showReleaseModal, setShowReleaseModal] = useState(false);
+  const [showReleaseModal] = useState(false); // setShowReleaseModal not currently used
 
   const defaultFilter = {
     name: "all",
@@ -227,16 +227,16 @@ export default function NamespaceListTable({
                 </Td>
                 <Td textCenter dataLabel={columnNames.reserved}>
                   {namespace.reserved ? (
-                    <CheckCircleIcon style={{ color: "green" }} />
+                    <CheckCircleIcon style={{ color: "var(--pf-t--global--color--nonstatus--green--default)" }} />
                   ) : (
                     ""
                   )}
                 </Td>
                 <Td textCenter dataLabel={columnNames.status}>
                   {namespace.status ? (
-                    <CheckCircleIcon style={{ color: "green" }} />
+                    <CheckCircleIcon style={{ color: "var(--pf-t--global--color--nonstatus--green--default)" }} />
                   ) : (
-                    <TimesCircleIcon style={{ color: "red" }} />
+                    <TimesCircleIcon style={{ color: "var(--pf-t--global--color--nonstatus--red--default)" }} />
                   )}
                 </Td>
                 <Td textCenter dataLabel={columnNames.cpu}>

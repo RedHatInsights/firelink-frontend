@@ -40,7 +40,7 @@ function AppComponentListLinks(components) {
 }
 
 export default function AppListItem({ app, showFavorites }) {
-  const [expanded, setExpanded] = useState(false);
+  // const [expanded, setExpanded] = useState(false); // Currently unused
   const compos = AppComponentListLinks(app.components);
   const key = `def-list-toggle-${app.name}`;
   const navigate = useNavigate();
@@ -106,12 +106,12 @@ export default function AppListItem({ app, showFavorites }) {
       }}
       key={key}
     >
-      <Card isLarge={true} isRounded={true} className="pf-u-box-shadow-lg" >
+      <Card isLarge={true}  className="pf-u-box-shadow-lg" >
         <CardTitle>
           <Split>
               <SplitItem isFilled></SplitItem>
               <SplitItem>
-                  <div style={{background: background, width: "2.5em", height: "2.5em", borderRadius: "10%", marginRight: "1em", color: "black", padding: "0.1em"}}>
+                  <div style={{background: background, width: "2.5em", height: "2.5em", borderRadius: "10%", marginRight: "1em", color: "var(--pf-t--global--text--color--inverse)", padding: "0.1em"}}>
                       <Title headingLevel="h3" size={TitleSizes["3x1"]} >
                           {appIconName() }
                       </Title>
@@ -142,8 +142,8 @@ export default function AppListItem({ app, showFavorites }) {
         <CardBody>
           <Stack>
             <StackItem>
-              <Button variant="link" onClick={developerPortalLink}>
-                <ExternalLinkAltIcon /> Developer Portal
+              <Button icon={<ExternalLinkAltIcon />} variant="link" onClick={developerPortalLink}>
+                 Developer Portal
               </Button>
             </StackItem>
             <StackItem>

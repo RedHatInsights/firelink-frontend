@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   Card,
   CardTitle,
   CardBody,
   EmptyState,
-  EmptyStateIcon,
   EmptyStateBody,
   Title,
   Skeleton,
@@ -49,22 +48,7 @@ const PodsTableCard = ({ namespace, onError = (_error) => {} }) => {
 
   const topPodsFromStore = useSelector(getNamespaceTopPods);
 
-  useEffect(() => {
-    //fetchData();
-    const interval = setInterval(() => {
-      setNextRefresh((prev) => prev - 1);
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    if (nextRefresh === 0) {
-      fetchData();
-      setNextRefresh(10);
-    }
-  }, [nextRefresh]);
-
-  const fetchData = () => {
+  const fetchData = useCallback(() => {
     if (!namespace) {
       return;
     }
@@ -80,11 +64,26 @@ const PodsTableCard = ({ namespace, onError = (_error) => {} }) => {
         setError(error);
         onError(error);
       });
-  };
+  }, [namespace, dispatch, onError]);
+
+  useEffect(() => {
+    //fetchData();
+    const interval = setInterval(() => {
+      setNextRefresh((prev) => prev - 1);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (nextRefresh === 0) {
+      fetchData();
+      setNextRefresh(10);
+    }
+  }, [nextRefresh, fetchData]);
 
   useEffect(() => {
     fetchData();
-  }, [namespace]);
+  }, [namespace, fetchData]);
 
   useEffect(() => {
     setTopPods(topPodsFromStore);
@@ -151,11 +150,9 @@ const PodsTableCard = ({ namespace, onError = (_error) => {} }) => {
       <Card>
         <CardTitle>Pods Resource Usage</CardTitle>
         <CardBody>
-          <EmptyState variant={EmptyStateVariant.full}>
-            <EmptyStateIcon icon={CubesIcon} />
-            <Title headingLevel="h2" size="lg">
+          <EmptyState titleText={<Title headingLevel="h2" size="lg">
               Error loading pods resource usage
-            </Title>
+            </Title>} icon={CubesIcon} variant={EmptyStateVariant.full}>
             <EmptyStateBody>
               An error occurred while loading pods resource usage.
             </EmptyStateBody>

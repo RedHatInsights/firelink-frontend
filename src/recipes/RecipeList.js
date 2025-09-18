@@ -11,7 +11,7 @@ export default function RecipeList({ onRecipeSelect }) {
   const recipes = useSelector(getDeployRecipes);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
-  const [dropdownTitle, setDropdownTitle] = useState('Select a Recipe');
+  const [dropdownTitle] = useState('Select a Recipe'); // setDropdownTitle currently unused
   const onToggle = (isOpen) => {
     setIsOpen(isOpen);
   };

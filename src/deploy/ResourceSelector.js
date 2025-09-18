@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { 
     getAppNames,
     getAppDeployComponents,
 } from "../store/AppDeploySlice";
-import { 
-    DualListSelector
-} from "@patternfly/react-core";
+import {
+	DualListSelector
+} from '@patternfly/react-core/deprecated';
 
 export default function ResourceSelector({setSelection, getSelection}) {
 
@@ -28,15 +28,15 @@ export default function ResourceSelector({setSelection, getSelection}) {
     }
 
     // Remove the chosen options from the available options
-    const removeChosenOptionsFromAvailable = () => {
+    const removeChosenOptionsFromAvailable = useCallback(() => {
         setAvailableOptions(availableOptions.filter(option => !chosenOptions.includes(option)));
-    }
+    }, [availableOptions, chosenOptions]);
 
     // When the selection changes, update the chosen options and remove them from the available options
     useEffect(() => {
         setChosenOptions(getSelection);
         removeChosenOptionsFromAvailable();
-    }, [getSelection]);
+    }, [getSelection, removeChosenOptionsFromAvailable]);
 
     return <DualListSelector
         id="resource-selector"

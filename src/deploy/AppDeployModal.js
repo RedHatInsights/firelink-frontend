@@ -2,13 +2,14 @@ import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import io from "socket.io-client";
 import {
-  Button,
-  Modal,
-  ModalVariant,
-  Text,
-  Grid,
-  GridItem,
-} from "@patternfly/react-core";
+	Button,
+	Grid,
+	GridItem
+} from '@patternfly/react-core';
+import {
+	Modal,
+	ModalVariant
+} from '@patternfly/react-core/deprecated';
 import { Spinner } from "@patternfly/react-core";
 import CheckCircle from "@patternfly/react-icons/dist/js/icons/check-circle-icon";
 import TimesCircle from "@patternfly/react-icons/dist/js/icons/times-circle-icon";
@@ -126,12 +127,12 @@ export default function AppDeployModal({
       return <Spinner size="md" />;
     }
     if (response.error === true) {
-      return <TimesCircle color="#FF0000" />;
+      return <TimesCircle style={{ color: "var(--pf-t--global--color--nonstatus--red--default)" }} />;
     }
     if (response.completed === true) {
-      return <CheckCircle color="#00FF00" />;
+      return <CheckCircle style={{ color: "var(--pf-t--global--color--nonstatus--green--default)" }} />;
     }
-    return <InfoCircle color="#00AAFF" />;
+    return <InfoCircle style={{ color: "var(--pf-t--global--color--nonstatus--blue--default)" }} />;
   };
 
   const close = () => {

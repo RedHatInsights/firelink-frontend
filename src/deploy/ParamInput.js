@@ -33,8 +33,8 @@ const ParamInput = ({ param, onParamChange }) => {
                         onChange={(e) => handleChange(e.target.value)}
                         aria-label={param.component + '/' + param.name}
                     />
-                    <Button variant="danger" size="sm" onClick={() => addOrRemoveSelectedParameter(param)}>
-                        <TimesCircleIcon />
+                    <Button icon={<TimesCircleIcon />} variant="danger" size="sm" onClick={() => addOrRemoveSelectedParameter(param)}>
+                        
                     </Button>
                 </TextInputGroup>
             </FormGroup>

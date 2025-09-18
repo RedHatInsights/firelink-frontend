@@ -23,6 +23,7 @@ const TopNodesCard = ({ topNodes }) => {
             <Td>
               <a
                 target="_blank"
+                rel="noreferrer"
                 href={`${openshiftConsoleBaseUrl}/k8s/cluster/nodes/${node["node"]}`}
               >
                 {node["node"]}

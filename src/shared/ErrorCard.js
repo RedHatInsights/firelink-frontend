@@ -1,7 +1,6 @@
 import React from "react";
 import {
   EmptyState,
-  EmptyStateIcon,
   Title,
   EmptyStateBody,
   Button,
@@ -19,14 +18,9 @@ function ErrorCard({ error, onRetry }) {
         <Card isLarge>
           <CardTitle>Error</CardTitle>
           <CardBody>
-            <EmptyState>
-              <EmptyStateIcon
-                icon={ExclamationCircleIcon}
-                color="red"
-              />
-              <Title headingLevel="h2" size="lg">
+            <EmptyState titleText={<Title headingLevel="h2" size="lg">
                 Something went wrong
-              </Title>
+              </Title>} icon={ExclamationCircleIcon}>
               <EmptyStateBody>{error}</EmptyStateBody>
               <Button variant="primary" onClick={() => onRetry() }>
                 Retry

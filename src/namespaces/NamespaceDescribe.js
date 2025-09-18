@@ -2,10 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   Button,
-  Page,
   Split,
   PageSection,
-  PageSectionVariants,
   InputGroup,
   TextInput,
   Title,
@@ -14,9 +12,7 @@ import {
   SplitItem,
   EmptyState,
   EmptyStateVariant,
-  EmptyStateHeader,
   EmptyStateBody,
-  EmptyStateIcon,
   Stack,
   StackItem,
   Grid,
@@ -49,12 +45,7 @@ function NamespaceDescribe() {
   };
 
   const NoNamespaceLoaded = () => (
-    <EmptyState variant={EmptyStateVariant.lg}>
-      <EmptyStateHeader
-        titleText="No Namespace Specified"
-        headingLevel="h4"
-        icon={<EmptyStateIcon icon={CubesIcon} />}
-      />
+    <EmptyState  headingLevel="h4" icon={CubesIcon}  titleText="No Namespace Specified" variant={EmptyStateVariant.lg}>
       <EmptyStateBody>
         Enter a namespace name in the input box above to get started.
       </EmptyStateBody>
@@ -67,9 +58,9 @@ function NamespaceDescribe() {
       if (inputRef.current) {
         inputRef.current.focus();
       }
-    }, [namespaceInput]);
+    }, []);
     return (
-      <PageSection variant={PageSectionVariants.light}>
+      <PageSection>
         <Split>
           <SplitItem>
             <Title headingLevel="h1" size={TitleSizes["3xl"]}>
@@ -100,28 +91,28 @@ function NamespaceDescribe() {
 
   if (namespace === "") {
     return (
-      <Page>
+      <React.Fragment>
         <ToolBar />
         <PageSection>
           <NoNamespaceLoaded />
         </PageSection>
-      </Page>
+      </React.Fragment>
     );
   }
 
   if (error) {
     return (
-      <Page>
+      <React.Fragment>
         <ToolBar />
         <PageSection isCenterAligned={true}>
           <ErrorCard error={error.message} onRetry={buttonClickHandler} />
         </PageSection>
-      </Page>
+      </React.Fragment>
     );
   }
 
   return (
-    <Page>
+    <React.Fragment>
       <ToolBar />
       <PageSection isCenterAligned={true} hasOverflowScroll={true}>
         <Stack hasGutter>
@@ -143,7 +134,7 @@ function NamespaceDescribe() {
           </StackItem>
         </Stack>
       </PageSection>
-    </Page>
+    </React.Fragment>
   );
 }
 

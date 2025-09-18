@@ -3,10 +3,7 @@ import {
   SplitItem,
   Title,
   TitleSizes,
-  Button,
-  Page,
   PageSection,
-  PageSectionVariants,
   Split,
   Switch,
 } from "@patternfly/react-core";
@@ -28,7 +25,6 @@ import ErrorCard from "../shared/ErrorCard";
 function NamespaceList() {
   const dispatch = useDispatch();
   const [showJustMyReservations, setShowJustMyReservations] = useState(false);
-  const [autoRefresh, setAutoRefresh] = useState(true);
   const isNamespacesEmpty = useSelector(getIsNamespacesEmpty);
   const namespaces = useSelector(getNamespaces);
   const loading = useSelector(getLoading);
@@ -41,16 +37,17 @@ function NamespaceList() {
   }, [dispatch]);
 
 
-  useEffect(() => {
-    let interval;
-    if (autoRefresh) {
-      interval = setInterval(() => {
-        dispatch(loadNamespaces());
-        dispatch(loadNamespaceResources());
-      }, 10000);
-    }
-    return () => clearInterval(interval);
-  }, [autoRefresh, dispatch]);
+  // Auto-refresh functionality removed for now
+  // useEffect(() => {
+  //   let interval;
+  //   if (autoRefresh) {
+  //     interval = setInterval(() => {
+  //       dispatch(loadNamespaces());
+  //       dispatch(loadNamespaceResources());
+  //     }, 10000);
+  //   }
+  //   return () => clearInterval(interval);
+  // }, [autoRefresh, dispatch]);
 
   if (isNamespacesEmpty && showJustMyReservations) {
     setShowJustMyReservations(false);
@@ -106,33 +103,27 @@ function NamespaceList() {
     }
   };
 
-  if (loading && !autoRefresh) {
+  if (loading) {
     return (
-      <Page>
-        <PageSection>
-          <Loading message="Fetching namespaces and reservations..." />
-        </PageSection>
-      </Page>
+      <PageSection>
+        <Loading message="Fetching namespaces and reservations..." />
+      </PageSection>
     );
   }
 
   if (showReleaseModal) {
     return (
-      <Page>
-        <PageSection>
-          <Loading message="Releasing namespace..." />
-        </PageSection>
-      </Page>
+      <PageSection>
+        <Loading message="Releasing namespace..." />
+      </PageSection>
     );
   }
 
   if (error) {
     return (
-      <Page>
-        <PageSection>
-          <ErrorCard error={error} onRetry={() => refreshData()} />
-        </PageSection>
-      </Page>
+      <PageSection>
+        <ErrorCard error={error} onRetry={() => refreshData()} />
+      </PageSection>
     )
   }
 
@@ -140,45 +131,43 @@ function NamespaceList() {
 
   return (
     <React.Fragment>
-      <Page>
-        <PageSection variant={PageSectionVariants.light}>
-          <Split hasGutter>
-            <SplitItem>
-              <Title headingLevel="h1" size={TitleSizes["3xl"]}>
-                Namespaces
-              </Title>
-            </SplitItem>
-            <SplitItem isFilled></SplitItem>
+      <PageSection>
+        <Split hasGutter>
+          <SplitItem>
+            <Title headingLevel="h1" size={TitleSizes["3xl"]}>
+              Namespaces
+            </Title>
+          </SplitItem>
+          <SplitItem isFilled></SplitItem>
 
-            <SplitItem>
-              <Switch
-                id="namespace-list-my-reservations"
-                label="My Reservations"
-                labelOff="My Reservations"
-                isChecked={showJustMyReservations}
-                isReversed
-                onChange={() => {
-                  setShowJustMyReservations(!showJustMyReservations);
-                }}
-              />
-            </SplitItem>
-
-          </Split>
-        </PageSection>
-        <PageSection hasOverflowScroll={true}>
-          {isNamespacesEmpty ? (
-            <FadeInFadeOut>
-              <Loading message="Fetching namespaces and reservations..." />
-            </FadeInFadeOut>
-          ) : (
-            <NamespaceListTable
-              namespaces={namespaces}
-              showJustMyReservations={showJustMyReservations}
-              onRelease={releaseNamespace}
+          <SplitItem>
+            <Switch
+              id="namespace-list-my-reservations"
+              label="My Reservations"
+              
+              isChecked={showJustMyReservations}
+              isReversed
+              onChange={() => {
+                setShowJustMyReservations(!showJustMyReservations);
+              }}
             />
-          )}
-        </PageSection>
-      </Page>
+          </SplitItem>
+
+        </Split>
+      </PageSection>
+      <PageSection hasOverflowScroll={true}>
+        {isNamespacesEmpty ? (
+          <FadeInFadeOut>
+            <Loading message="Fetching namespaces and reservations..." />
+          </FadeInFadeOut>
+        ) : (
+          <NamespaceListTable
+            namespaces={namespaces}
+            showJustMyReservations={showJustMyReservations}
+            onRelease={releaseNamespace}
+          />
+        )}
+      </PageSection>
     </React.Fragment>
   );
 }

@@ -4,9 +4,7 @@ import {
   Title,
   TitleSizes,
   TextInput,
-  Page,
   PageSection,
-  PageSectionVariants,
   Gallery,
   Split,
   SplitItem,
@@ -33,7 +31,7 @@ function AppList() {
     if (apps.length === 0) {
       dispatch(loadApps());
     }
-  }, [dispatch]);
+  }, [dispatch, apps.length]);
 
   useEffect(() => {
     setFilteredApps(
@@ -47,27 +45,23 @@ function AppList() {
 
   if (loading) {
     return (
-      <Page>
-        <PageSection>
-          <Loading message="Fetching app list..." />
-        </PageSection>
-      </Page>
+      <PageSection>
+        <Loading message="Fetching app list..." />
+      </PageSection>
     );
   }
 
   if (error) {
     return (
-      <Page>
-        <PageSection>
-          <ErrorCard error={error} onRetry={handleRefresh} />
-        </PageSection>
-      </Page>
+      <PageSection>
+        <ErrorCard error={error} onRetry={handleRefresh} />
+      </PageSection>
     );
   }
 
   return (
-    <Page>
-      <PageSection variant={PageSectionVariants.light}>
+    <React.Fragment>
+      <PageSection>
         <Split hasGutter>
           <SplitItem>
             <Title headingLevel="h1" size={TitleSizes["3xl"]}>
@@ -80,7 +74,7 @@ function AppList() {
               isReversed="true"
               id="app-list-favorites"
               label="Show Favorites"
-              labelOff="Show Favorites"
+              
               isChecked={showFavorites}
               onChange={() => setShowFavorites(!showFavorites)}
             />
@@ -114,7 +108,7 @@ function AppList() {
           </Gallery>
         </FadeInFadeOut>
       </PageSection>
-    </Page>
+    </React.Fragment>
   );
 }
 

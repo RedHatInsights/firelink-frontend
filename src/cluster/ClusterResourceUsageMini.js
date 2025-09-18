@@ -4,9 +4,8 @@ import {
   ProgressVariant,
   ProgressMeasureLocation,
   Tooltip,
-  Text,
-  TextContent,
-} from "@patternfly/react-core";
+  Content,
+  } from "@patternfly/react-core";
 
 const ClusterResourceUsageMini = ({ metrics, showDetails = false }) => {
   const usage_percent = metrics.find(
@@ -38,16 +37,16 @@ const ClusterResourceUsageMini = ({ metrics, showDetails = false }) => {
         />
       </Tooltip>
       {showDetails && (
-        <TextContent>
-          <Text>
+        <Content>
+          <Content component="p">
             {tooltipContent
               .trim()
               .split("\n")
               .map((line) => (
                 <div key={line}>{line}</div>
               ))}
-          </Text>
-        </TextContent>
+          </Content>
+        </Content>
       )}
     </div>
   );

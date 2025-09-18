@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import Loading from "../shared/Loading";
 import ErrorCard from "../shared/ErrorCard";
 import {
-  Page,
-  PageSectionVariants,
   PageSection,
   Split,
   SplitItem,
@@ -12,12 +10,11 @@ import {
   TitleSizes,
   Wizard,
   WizardStep,
-  TextContent,
-  Text,
+  Content,
   Stack,
   StackItem,
   Alert,
-  TextVariants,
+  ContentVariants,
   Switch,
 } from "@patternfly/react-core";
 import { useSelector, useDispatch } from "react-redux";
@@ -65,12 +62,13 @@ export default function AppDeploy() {
   const setNoRemoveResourcesAction = (value) => {
     dispatch(setNoRemoveResources(value));
   };
-  const setRemoveDependenciesAction = (value) => {
+  const setRemoveDependenciesAction = useCallback((value) => {
     dispatch(setRemoveDependencies(value));
-  };
-  const setRequesterAction = (value) => {
+  }, [dispatch]);
+  
+  const setRequesterAction = useCallback((value) => {
     dispatch(setAppDeployRequester(value));
-  };
+  }, [dispatch]);
 
   const [advancedMode, setAdvancedMode] = useState(false);
   const [showNamespaceStep, setShowNamespaceStep] = useState(false);
@@ -80,7 +78,7 @@ export default function AppDeploy() {
     dispatch(clearAll());
     dispatch(clearAppDeployOptions());
     setRequesterAction(requester);
-  }, []);
+  }, [dispatch, requester, setRequesterAction]);
 
   useEffect(() => {
     if (isAppsEmpty) {
@@ -123,7 +121,7 @@ export default function AppDeploy() {
       dispatch(addOrRemoveApp(appObj));
       dispatch(addOrRemoveAppName(appObj.name));
     }
-  }, [appParam, dispatch, isAppsEmpty]);
+  }, [appParam, dispatch, isAppsEmpty, apps]);
 
   const loadingMessage = () => {
     if (isAppsEmpty && isNamespacesEmpty) {
@@ -150,17 +148,15 @@ export default function AppDeploy() {
 
   if (error !== null) {
     return (
-        <Page>
-            <PageSection>
-                <ErrorCard error={error} onRetry={handleRetry} />
-            </PageSection>
-        </Page>
+      <PageSection>
+        <ErrorCard error={error} onRetry={handleRetry} />
+      </PageSection>
     )
   }
 
   return (
-    <Page>
-      <PageSection variant={PageSectionVariants.light}>
+    <React.Fragment>
+      <PageSection>
         <Split>
           <SplitItem>
             <Title headingLevel="h1" size={TitleSizes["3xl"]}>
@@ -216,21 +212,21 @@ export default function AppDeploy() {
             >
               <Stack hasGutter>
                 <StackItem>
-                  <TextContent>
-                    <Text component={TextVariants.h1}>
+                  <Content>
+                    <Content component={ContentVariants.h1}>
                       Preserve CPU & RAM for Apps or Components
-                    </Text>
-                  </TextContent>
+                    </Content>
+                  </Content>
                 </StackItem>
                 <StackItem>
-                  <TextContent>
-                    <Text>
+                  <Content>
+                    <Content component="p">
                       Bonfire removes CPU and memory resource requests and
                       limits by default. Select any ClowdApps and
                       ResourceTemplates you may want to preserve requests and
                       limits for. ClowdApps are prepended by "app:".
-                    </Text>
-                  </TextContent>
+                    </Content>
+                  </Content>
                 </StackItem>
                 <StackItem>
                   <Alert
@@ -255,21 +251,21 @@ export default function AppDeploy() {
             >
               <Stack hasGutter>
                 <StackItem>
-                  <TextContent>
-                    <Text component={TextVariants.h1}>
+                  <Content>
+                    <Content component={ContentVariants.h1}>
                       Select Dependencies to Omit
-                    </Text>
-                  </TextContent>
+                    </Content>
+                  </Content>
                 </StackItem>
                 <StackItem>
-                  <TextContent>
-                    <Text>
+                  <Content>
+                    <Content component="p">
                       Bonfire deploys all dependencies for your ClowdApps and
                       Resource Templates. If you wish to omit dependencies for a
                       ClowdApp or ResourceTemplate, select them here. ClowdApps
                       are prepended by "app:".
-                    </Text>
-                  </TextContent>
+                    </Content>
+                  </Content>
                 </StackItem>
                 <StackItem>
                   <ResourceSelector
@@ -305,6 +301,6 @@ export default function AppDeploy() {
           </Wizard>
         )}
       </PageSection>
-    </Page>
+    </React.Fragment>
   );
 }

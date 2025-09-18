@@ -14,9 +14,7 @@ import {
   CodeBlockCode,
   FormGroup,
   TextInput,
-  Page,
   PageSection,
-  PageSectionVariants,
   SplitItem,
   CardTitle,
 } from "@patternfly/react-core";
@@ -32,7 +30,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { getRequester } from "../store/AppSlice";
 import { 
   loadNamespaces, 
-  clearNamespaces,
   reserveNamespace 
 } from "../store/ListSlice";
 import FadeInFadeOut from "../shared/FadeInFadeOut";
@@ -108,7 +105,7 @@ export default function NamespaceReserve() {
       >
         <Switch
           label="Yes"
-          labelOff="No"
+          
           isChecked={force}
           onChange={handleForce}
         />
@@ -173,31 +170,29 @@ export default function NamespaceReserve() {
 
   return (
     <React.Fragment>
-      <Page>
-        <PageSection variant={PageSectionVariants.light}>
-          <Split>
-            <SplitItem>
-              <Title headingLevel="h1" size={TitleSizes["3xl"]}>
-                Reserve Namespace
-              </Title>
-            </SplitItem>
-            <SplitItem isFilled />
-            <SplitItem>
-              <Button
-                onClick={() => {
-                  requestReservation();
-                }}
-                variant="primary"
-              >
-                Reserve
-              </Button>
-            </SplitItem>
-          </Split>
-        </PageSection>
-        <PageSection isCenterAligned={true}>
-          <FadeInFadeOut>{renderUI()}</FadeInFadeOut>
-        </PageSection>
-      </Page>
+      <PageSection>
+        <Split>
+          <SplitItem>
+            <Title headingLevel="h1" size={TitleSizes["3xl"]}>
+              Reserve Namespace
+            </Title>
+          </SplitItem>
+          <SplitItem isFilled />
+          <SplitItem>
+            <Button
+              onClick={() => {
+                requestReservation();
+              }}
+              variant="primary"
+            >
+              Reserve
+            </Button>
+          </SplitItem>
+        </Split>
+      </PageSection>
+      <PageSection isCenterAligned={true}>
+        <FadeInFadeOut>{renderUI()}</FadeInFadeOut>
+      </PageSection>
     </React.Fragment>
   );
 }

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useMemo, useCallback} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
     TreeView,
@@ -9,17 +9,13 @@ import {
     CardBody,
     Stack,
     StackItem,
-    Text,
-    TextContent,
-    TextVariants,
+    Content,
+    ContentVariants,
 } from '@patternfly/react-core';
 import {
     getAppDeployApps,
     setSetParameter
 } from "../store/AppDeploySlice";
-import {
-    getDarkMode
-} from "../store/AppSlice";
 import {
     createStoreOptionsFromApps,
     getStoreOptions,
@@ -30,34 +26,30 @@ import ParamInput from "./ParamInput";
 
 export default function SetParameters() {
 
-    const DARK_GRAY = "#26292d";
-    const WHITE = "#FFFFFF";
-    const PARAMETER_SELECT_CARD_STYLE = {height: "30rem", overflow: "auto", backgroundColor: "#FFFFFF"}
+    const PARAMETER_SELECT_CARD_STYLE = useMemo(() => ({height: "30rem", overflow: "auto"}), []);
 
     const dispatch = useDispatch();
 
     const options = useSelector(getStoreOptions);
     const selectedParameters = useSelector(getStoreSelectedParameters);
     const apps = useSelector(getAppDeployApps);
-    const darkMode = useSelector(getDarkMode);
 
-    const setStoreSetParameter = (param) => dispatch(setSetParameter(param));
-    const createOptionsFromApps = (apps) => dispatch(createStoreOptionsFromApps(apps));
-    const setSelectedParameters = (params) => dispatch(setStoreSelectedParameters(params));
+    const setStoreSetParameter = useCallback((param) => dispatch(setSetParameter(param)), [dispatch]);
+    const createOptionsFromApps = useCallback((apps) => dispatch(createStoreOptionsFromApps(apps)), [dispatch]);
+    const setSelectedParameters = useCallback((params) => dispatch(setStoreSelectedParameters(params)), [dispatch]);
 
 
     const [cardBodyStyle, setCardBodyStyle] = useState(PARAMETER_SELECT_CARD_STYLE)
 
     useEffect(() => {
-        const color = darkMode ? DARK_GRAY : WHITE
-        setCardBodyStyle({...PARAMETER_SELECT_CARD_STYLE, backgroundColor: color})
-    }, [darkMode])
+        setCardBodyStyle(PARAMETER_SELECT_CARD_STYLE)
+    }, [PARAMETER_SELECT_CARD_STYLE])
 
     useEffect(() => {
         if (apps.length > 0) {
             createOptionsFromApps(apps)
         }
-    }, [apps])
+    }, [apps, createOptionsFromApps])
 
     useEffect(() => {
         // Need to send the selected params and their values to the store
@@ -67,7 +59,7 @@ export default function SetParameters() {
             return acc;
         }, {});
         setStoreSetParameter(selectedParams);
-    }, [selectedParameters]);
+    }, [selectedParameters, setStoreSetParameter]);
     
 
 
@@ -95,11 +87,11 @@ export default function SetParameters() {
 
     return <Stack>
         <StackItem>
-            <TextContent>
-                <Text component={TextVariants.h1}>
+            <Content>
+                <Content component={ContentVariants.h1}>
                     Override Deploy Template Parameters
-                </Text>
-            </TextContent>
+                </Content>
+            </Content>
         </StackItem>
         <StackItem>
             <Grid hasGutter isFullHeight>

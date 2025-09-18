@@ -4,21 +4,20 @@ import {
   ProgressVariant,
   ProgressMeasureLocation,
   Tooltip,
-  Text,
-  TextContent,
-  TextVariants,
+  Content,
+  ContentVariants,
   Skeleton
 } from '@patternfly/react-core';
 import { useSelector } from 'react-redux';
-import { 
-  getNamespaceResources,
-  getNamespaceResourcesLoading 
+import {
+  getNamespaceResources
+  // getNamespaceResourcesLoading  // Currently unused
 
 } from '../store/ListSlice';
 
 const ResourceUsageMini = ({ namespace, resource, showDetails = false }) => {
   const data = useSelector(getNamespaceResources);
-  const loading = useSelector(getNamespaceResourcesLoading);
+  // const loading = useSelector(getNamespaceResourcesLoading); // Currently unused
   
 
   if (!data[namespace] && showDetails) {
@@ -58,9 +57,9 @@ const ResourceUsageMini = ({ namespace, resource, showDetails = false }) => {
   return (
     <div>
       {showDetails && (
-        <TextContent>
-          <Text component={TextVariants.h6}>{resource.toUpperCase()}</Text>
-        </TextContent>
+        <Content>
+          <Content component={ContentVariants.h6}>{resource.toUpperCase()}</Content>
+        </Content>
       )}
       <Tooltip content={tooltipContent}>
         <Progress
@@ -71,9 +70,9 @@ const ResourceUsageMini = ({ namespace, resource, showDetails = false }) => {
         />
       </Tooltip>
       {showDetails && (
-        <TextContent>
-          <Text>{tooltipContent.trim().split('\n').map(line => <div key={line}>{line}</div>)}</Text>
-        </TextContent>
+        <Content>
+          <Content component="p">{tooltipContent.trim().split('\n').map(line => <div key={line}>{line}</div>)}</Content>
+        </Content>
       )}
     </div>
   );

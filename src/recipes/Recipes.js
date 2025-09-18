@@ -1,21 +1,17 @@
-import { React, useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import {
-    Page,
     PageSection,
     Split,
     SplitItem,
     Title,
     TitleSizes,
-    PageSectionVariants,
     Card,
     CardBody,
     Button,
     EmptyState,
     EmptyStateVariant,
     EmptyStateBody,
-    EmptyStateHeader,
-    EmptyStateIcon,
     Stack,
     StackItem,
 } from '@patternfly/react-core';
@@ -88,7 +84,7 @@ export default function Recipes() {
         return str
           .toLowerCase() // Convert to lowercase
           .replace(/\s+/g, '_') // Replace spaces with underscores
-          .replace(/[<>:"\/\\|?*]+/g, ''); // Remove invalid filesystem characters
+          .replace(/[<>:"/\\|?*]+/g, ''); // Remove invalid filesystem characters
       };
 
     const downloadRecipe = () => {
@@ -159,8 +155,7 @@ export default function Recipes() {
     };
 
     const NoRecipeLoaded = () => {
-        return <EmptyState variant={EmptyStateVariant.lg}>
-            <EmptyStateHeader titleText="No Recipe Loaded" headingLevel="h4" icon={<EmptyStateIcon icon={CubesIcon} />} />
+        return <EmptyState  headingLevel="h4" icon={CubesIcon}  titleText="No Recipe Loaded" variant={EmptyStateVariant.lg}>
             <EmptyStateBody>
                 Select a recipe from the left to view its details.
             </EmptyStateBody>
@@ -169,8 +164,7 @@ export default function Recipes() {
 
     const NoRecipes = () => {
         return <CardBody>
-            <EmptyState variant={EmptyStateVariant.lg}>
-                <EmptyStateHeader titleText="No Recipes Found" headingLevel="h4" icon={<EmptyStateIcon icon={CubesIcon} />} />
+            <EmptyState  headingLevel="h4" icon={CubesIcon}  titleText="No Recipes Found" variant={EmptyStateVariant.lg}>
                 <EmptyStateBody>
                     No recipes found. You can create a recipe by going through the Deploy wizard or by uploading a recipe file.
                 </EmptyStateBody>
@@ -178,8 +172,8 @@ export default function Recipes() {
         </CardBody>
     }
 
-    return <Page>
-        <PageSection variant={PageSectionVariants.light}>
+    return <React.Fragment>
+        <PageSection>
             <Split hasGutter>
                 <SplitItem>
                     <Title headingLevel="h1" size={TitleSizes['3xl']}>
@@ -241,5 +235,5 @@ export default function Recipes() {
                     </Card>
                 }
         </PageSection>
-    </Page> 
+    </React.Fragment> 
 }

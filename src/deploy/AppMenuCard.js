@@ -14,10 +14,9 @@ import {
     MenuSearchInput,
     SearchInput,
     Switch,
-    TextContent,
-    TextVariants,
-    Text,
-} from '@patternfly/react-core';
+    Content,
+    ContentVariants,
+    } from '@patternfly/react-core';
 import { useSelector, useDispatch } from 'react-redux';
 import {
     getApps,
@@ -100,11 +99,11 @@ export default function AppMenuCard(props) {
         <StackItem>
             <Split>
                 <SplitItem>
-                    <TextContent>
-                        <Text component={TextVariants.h1}>
+                    <Content>
+                        <Content component={ContentVariants.h1}>
                             Select Apps to Deploy
-                        </Text>
-                    </TextContent>
+                        </Content>
+                    </Content>
                 </SplitItem>
                 <SplitItem isFilled/>
                 <SplitItem>
@@ -113,11 +112,11 @@ export default function AppMenuCard(props) {
             </Split>
         </StackItem>
         <StackItem>
-            <TextContent>
-                <Text>
+            <Content>
+                <Content component="p">
                     Select the apps you want to deploy. You can filter the list by typing in the search box. You can also filter the list to show only your favorite apps. Press the Quick Deploy button to deploy the selected apps with default options.
-                </Text>
-            </TextContent>
+                </Content>
+            </Content>
         </StackItem>
         <StackItem>
             <SelectedAppsChips />

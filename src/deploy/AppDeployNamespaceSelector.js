@@ -1,14 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import Loading from '../shared/Loading';
 import {
 	Radio,
 	Stack,
 	StackItem,
     FormSelect,
     FormSelectOption,
-    Text,
-    TextContent,
-    TextVariants,
+    Content,
+    ContentVariants,
 } from '@patternfly/react-core';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -33,7 +31,7 @@ export default function AppDeployNamespaceSelector() {
     // Set the namespace in the store when the selected reservation changes
     useEffect(() => {
         dispatch(setNamespace(selectedReservation));
-    }, [selectedReservation])
+    }, [selectedReservation, dispatch])
 
     // If the namespace select is hidden, set the namespace to an empty string
     // If the namespace select is shown, set the namespace to the first reservation
@@ -45,7 +43,7 @@ export default function AppDeployNamespaceSelector() {
         if (myReservations.length > 0) {
             setSelectedReservation(myReservations[0].namespace);
         }
-    }, [showNamespaceSelect])
+    }, [showNamespaceSelect, dispatch, myReservations])
 
     const MyReservationSelect = () => {
         if (showNamespaceSelect === false) {
@@ -60,31 +58,31 @@ export default function AppDeployNamespaceSelector() {
         </FormSelect>
     }
 
-    const NamespaceSelection = () => {
-        if ( myReservations.length === 0 ) {
-            return <React.Fragment>
-                <p>You have no namespaces reserved. A new namespace will be reserved for you.</p>
-            </React.Fragment>
-        } else {
-            return 
-        }
-    }
+    // const NamespaceSelection = () => {
+    //     if ( myReservations.length === 0 ) {
+    //         return <React.Fragment>
+    //             <p>You have no namespaces reserved. A new namespace will be reserved for you.</p>
+    //         </React.Fragment>
+    //     } else {
+    //         return 
+    //     }
+    // } // Currently unused
 
     return <Stack hasGutter>
         <StackItem>
-            <TextContent>
-                <Text component={TextVariants.h1}>
+            <Content>
+                <Content component={ContentVariants.h1}>
                     Namespace Selection
-                </Text>
-            </TextContent>
+                </Content>
+            </Content>
         </StackItem>
         { myReservations.length === 0 ? (
                 <StackItem>
-                    <TextContent>
-                        <Text>
+                    <Content>
+                        <Content component="p">
                             You have no namespaces reserved. A new namespace will be reserved for you.
-                        </Text>
-                    </TextContent>
+                        </Content>
+                    </Content>
                 </StackItem>
             ) : ( <React.Fragment>
                 <StackItem>
