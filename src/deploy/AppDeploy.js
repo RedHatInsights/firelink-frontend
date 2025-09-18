@@ -168,7 +168,9 @@ export default function AppDeploy() {
       </PageSection>
       <PageSection hasOverflowScroll>
         {isAppsEmpty || isNamespacesEmpty ? (
-          <Loading message={loadingMessage()} />
+          <div style={{ padding: "2rem" }}>
+            <Loading message={loadingMessage()} />
+          </div>
         ) : (
           <Wizard isVisitRequired>
             <WizardStep

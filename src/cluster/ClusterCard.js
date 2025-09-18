@@ -145,11 +145,7 @@ const ClusterCard = () => {
   }
 
   if (isLoading) {
-    return (
-      <PageSection>
-        <Loading message="Loading cluster metrics..." />
-      </PageSection>
-    );
+    return <Loading message="Loading cluster metrics..." />;
   }
 
   return (

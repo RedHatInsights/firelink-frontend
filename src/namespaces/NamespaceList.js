@@ -104,19 +104,11 @@ function NamespaceList() {
   };
 
   if (loading) {
-    return (
-      <PageSection>
-        <Loading message="Fetching namespaces and reservations..." />
-      </PageSection>
-    );
+    return <Loading message="Fetching namespaces and reservations..." />;
   }
 
   if (showReleaseModal) {
-    return (
-      <PageSection>
-        <Loading message="Releasing namespace..." />
-      </PageSection>
-    );
+    return <Loading message="Releasing namespace..." />;
   }
 
   if (error) {
@@ -158,7 +150,9 @@ function NamespaceList() {
       <PageSection hasOverflowScroll={true}>
         {isNamespacesEmpty ? (
           <FadeInFadeOut>
-            <Loading message="Fetching namespaces and reservations..." />
+            <div style={{ padding: "2rem" }}>
+              <Loading message="Fetching namespaces and reservations..." />
+            </div>
           </FadeInFadeOut>
         ) : (
           <NamespaceListTable

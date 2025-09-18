@@ -6,25 +6,32 @@ import {
   CardBody,
   Content,
   CardTitle,
-  CardFooter,
 } from "@patternfly/react-core";
 
 function Loading(message = "") {
   return (
-    <Bullseye style={{ height: "12em" }}>
-      <div style={{ width: "24rem", textAlign: "center" }}>
-        <Card isLarge>
-          <CardTitle>Loading...</CardTitle>
-          <CardBody>
-            <Bullseye>
-              <Spinner aria-label="Loading" />
-              <Content></Content>
-            </Bullseye>
-          </CardBody>
-          <CardFooter>{message.message}</CardFooter>
-        </Card>
-      </div>
-    </Bullseye>
+    <div style={{ 
+      display: "flex", 
+      justifyContent: "center", 
+      alignItems: "center", 
+      minHeight: "20vh",
+      width: "100%",
+      overflow: "hidden" // Prevent scroll bars
+    }}>
+      <Card style={{ width: "24rem", maxWidth: "90%" }}>
+        <CardTitle>Loading...</CardTitle>
+        <CardBody>
+          <Bullseye>
+            <Spinner aria-label="Loading" />
+          </Bullseye>
+          {message.message && (
+            <Content style={{ marginTop: "1rem", textAlign: "center" }}>
+              {message.message}
+            </Content>
+          )}
+        </CardBody>
+      </Card>
+    </div>
   )
 }
 
