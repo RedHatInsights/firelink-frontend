@@ -2,3 +2,22 @@
 .pf-v6-c-page__main {
   min-height: calc(100vh - var(--pf-v6-c-masthead--Height, 80px) - 4rem);
 }
+
+/* Logo color adjustment for light mode readability - target only white elements */
+.firelink-logo {
+  transition: all 0.3s ease;
+}
+
+/* In light mode, change white text to black while preserving Red Hat logo colors */
+html:not(.pf-v6-theme-dark) .firelink-logo svg path[style*="fill:white"] {
+  fill: #151515 !important;
+}
+
+html:not(.pf-v6-theme-dark) .firelink-logo svg path[style*="fill:rgb(238,0,0)"] {
+  fill: rgb(238,0,0) !important; /* Ensure Red Hat logo stays red */
+}
+
+/* Keep the dividing line visible in light mode */
+html:not(.pf-v6-theme-dark) .firelink-logo svg path#Dividing_line_3_ {
+  fill: #cccccc !important;
+}
