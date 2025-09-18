@@ -34,6 +34,7 @@ const ClusterResourceUsageMini = ({ metrics, showDetails = false }) => {
           }
           variant={variant}
           label={showDetails ? `${usage_percent.toFixed(2)}%` : ""}
+          icon={null}
         />
       </Tooltip>
       {showDetails && (

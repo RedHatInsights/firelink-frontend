@@ -88,6 +88,7 @@ const ResourceUsageProgress = ({ namespace, resource, showDetails = false }) => 
           measureLocation={showDetails ? ProgressMeasureLocation.outside : ProgressMeasureLocation.none}
           variant={variant}
           label={showDetails ? `${percentage.toFixed(2)}%` : ''}
+          icon={null}
         />
       </Tooltip>
       {showDetails && (

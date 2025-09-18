@@ -17,6 +17,7 @@ const ClusterResourceUsage = ({ data, resourceType }) => {
       title={`${resourceType} Usage`}
       measureLocation={ProgressMeasureLocation.outside}
       variant={data > 0.8 ? ProgressVariant.danger : ProgressVariant.success}
+      icon={null}
     />
   );
 };
