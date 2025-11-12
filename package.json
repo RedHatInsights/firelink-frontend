@@ -50,6 +50,6 @@
   },
   "devDependencies": {
     "@testing-library/react": "^14.2.1",
-    "http-proxy-middleware": "^2.0.6"
+    "http-proxy-middleware": "^3.0.0"
   }
 }
