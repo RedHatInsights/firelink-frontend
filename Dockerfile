@@ -1,5 +1,5 @@
 # Stage 1: Build the React application
-FROM registry.access.redhat.com/ubi9/nodejs-22:9.7-1762230782 as react-build
+FROM registry.access.redhat.com/ubi9/nodejs-22:9.7-1763455042 as react-build
 
 USER 0
 
