@@ -97,8 +97,8 @@ export default function NamespaceReserve() {
           isDisabled
         />
       </FormGroup>
-      <DurationSelectList duration={duration} setDuration={setDuration} />
-      <PoolSelectList pool={pool} setPool={setPool} />
+      <DurationSelectList value={duration} setValue={setDuration} />
+      <PoolSelectList value={pool} setValue={setPool} />
       <FormGroup
         label="Allow Multiple Reservations"
         fieldId="simple-form-force-01"
