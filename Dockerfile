@@ -1,25 +1,18 @@
 # Stage 1: Build the React application
-FROM registry.access.redhat.com/ubi9/nodejs-22:9.7-1776920122 as react-build
+FROM registry.access.redhat.com/hi/nodejs:24.21.0-1792544770 as react-build
 
-USER 0
-
-# Set the working directory for the React app
 WORKDIR /app
 
-# Copy package.json and package-lock.json (or yarn.lock) for React app
 COPY package*.json ./
 
-# Install React app dependencies
-RUN npm install
+RUN npm ci
 
-# Copy the React app source code
-COPY . ./
+COPY . .
 
-# Build the React app
 RUN npm run build
 
 # Stage 2: Serve the app
-FROM quay.io/redhat-services-prod/hcm-eng-prod-tenant/caddy-ubi:dd37f62
+FROM quay.io/redhat-services-prod/hcm-eng-prod-tenant/caddy-ubi:9c48e04
 
 ENV CADDY_TLS_MODE http_port 8000
 

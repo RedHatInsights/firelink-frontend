@@ -1,29 +1,30 @@
 {
-	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
-	"extends": [
-		":disableMajorUpdates",
-		"github>konflux-ci/mintmaker-presets:cve-automerge-all",
-		":npm",
-		":group:react"
-	],
-	"dockerfile": {
-		"managerFilePatterns": [
-			"/Dockerfile$/"
-		]
-	},
-	"packageRules": [
-		{
-			"matchDatasources": [ "docker" ],
-			"matchPackageNames": [
-				"registry.access.redhat.com/ubi9/nodejs-22"
-			],
-			"versioning": "redhat"
-		},
-		{
-			"groupName": "patternfly packages",
-			"matchPackageNames": [
-				"@patternfly/**"
-			]
-		}
-	]
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "minimumReleaseAge": "2 days",
+  "extends": [
+    ":disableMajorUpdates",
+    "helpers:disableTypesNodeMajor",
+    "github>konflux-ci/mintmaker-presets:cve-automerge-all",
+    "group:react"
+  ],
+  "constraints": {
+    "node": "24",
+    "npm": "11"
+  },
+  "packageRules": [
+    {
+      "description": "Group Docker dependencies minor, patch and digest updates",
+      "matchManagers": [ "docker" ],
+      "matchUpdateTypes": [ "digest", "minor", "patch" ],
+      "groupName": "docker dependencies",
+      "groupSlug": "docker-dependencies"
+    },
+    {
+      "description": "Group npm dependencies minor, patch and digest updates",
+      "matchManagers": [ "npm" ],
+      "matchUpdateTypes": [ "digest", "minor", "patch" ],
+      "groupName": "npm dependencies",
+      "groupSlug": "npm-dependencies"
+    }
+  ]
 }
