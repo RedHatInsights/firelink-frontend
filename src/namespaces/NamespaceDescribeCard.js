@@ -108,7 +108,9 @@ const NamespaceDescriptionCard = ({namespace, onError = (error) => {}}) => {
                     <a href={description[key].route} target="_blank" rel="noopener noreferrer">
                       {description[key].route}
                     </a>
-                    <div>Username: {description[key].login.username}, Password: {description[key].login.password}</div>
+                    {description[key].login && (
+                      <div>Username: {description[key].login.username}, Password: {description[key].login.password}</div>
+                    )}
                   </DescriptionListDescription>
                 </DescriptionListGroup>
               );
